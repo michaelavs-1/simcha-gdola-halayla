@@ -346,7 +346,7 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
   const hbg = document.querySelector('.hero-bg');
   const sb = document.getElementById('soundBtn'), sl = document.getElementById('soundLabel'), sw = document.getElementById('soundWave');
   let wantSound = true;           // default: sound on
-  let userMuted = false;          // set only when the viewer presses the button
+  let userMuted = false;          // set when the viewer mutes, or after they watch another video
   let started = false;
   function paint(){
     const on = !hv.muted;
@@ -363,7 +363,7 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
   startHero();
   // browsers block sound until the first interaction: turn it on at the first touch, click or key press
   const unlock = (ev) => {
-    if (ev && ev.target && ev.target.closest && ev.target.closest('#soundBtn')) return;
+    if (ev && ev.target && ev.target.closest && ev.target.closest('#soundBtn, .tile, #lb')) return;
     if (!userMuted && hv.muted && !(document.getElementById('lb').open)) { hv.muted = false; hv.play().then(paint).catch(()=>{ hv.muted = true; paint(); }); }
     if (hbg && hbg.paused && getComputedStyle(hbg).display !== 'none') hbg.play().catch(()=>{});
   };
@@ -441,6 +441,7 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
     lc.textContent = (cur+1) + ' / ' + VIDEOS.length;
   }
   function openLb(i){
+    userMuted = true; wantSound = false; hv.muted = true; paint();
     hv.pause();
     document.querySelectorAll('.tile video').forEach(x => x.pause());
     if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open','');
