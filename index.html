@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="שמחה גדולה הלילה · בארבי">
-<meta property="og:description" content="חאפלה מזרח תיכון, הפקת מקור של בארבי. יום שני 26.10.2026, בארבי נמל יפו.">
+<meta property="og:title" content="שמחה גדולה הלילה · בארבי וחתול בשק">
+<meta property="og:description" content="חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק.">
 <meta property="og:image" content="https://simcha-gdola-halayla.vercel.app/img/poster.jpg">
 <meta property="og:url" content="https://simcha-gdola-halayla.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0a0d13">
 <title>שמחה גדולה הלילה</title>
-<meta name="description" content="שמחה גדולה הלילה — חאפלה מזרח תיכון, הפקת מקור של בארבי. הערב הבא: יום שני 26.10.2026, בארבי נמל יפו.">
+<meta name="description" content="שמחה גדולה הלילה — חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Karantina:wght@400;700&family=Assistant:wght@400;600;700&display=swap">
@@ -52,6 +52,13 @@ a{color:inherit}
 .btn-sm{padding:8px 18px;font-size:15px}
 .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
 
+.logos{display:flex;align-items:center;gap:12px}
+.logos img{display:block;max-width:100%}
+.logos-sm .lg-barby{height:30px;width:auto}
+.logos-sm .lg-round{height:36px;width:36px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+.logos-lg{margin-top:28px;gap:22px;flex-wrap:wrap}
+.logos-lg .lg-barby{height:52px;width:auto}
+.logos-lg .lg-round{height:76px;width:76px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
 /* hero */
 .hero{position:relative;background:#000;overflow:hidden}
 .hero video{display:block;width:100%;height:auto;max-height:86vh;object-fit:cover;aspect-ratio:16/9}
@@ -175,49 +182,38 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 <header class="bar">
   <div class="wrap">
     <div class="brand">שמחה גדולה הלילה<span>· בארבי נמל יפו</span></div>
-    <a class="btn btn-gold btn-sm" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לכרטיסים</a>
+    <div class="logos logos-sm">
+      <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131">
+      <img src="img/logo-hatul-basak.jpg" alt="חתול בשק" class="lg-round" width="200" height="200">
+      <img src="img/logo-algorithm.jpg" alt="אלגוריתם הפקות" class="lg-round" width="200" height="200">
+    </div>
   </div>
 </header>
 
 <div class="hero" id="top">
-  <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="v/hero_wide.jpg"></video>
+  <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="v/hero_wide.jpg"></video>
   <button class="sound" id="soundBtn" type="button" aria-pressed="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="soundWave" d="M17 9l4 6M21 9l-4 6"/></svg>
     <span id="soundLabel">הפעלת סאונד</span>
   </button>
   <div class="hero-copy">
     <div class="wrap">
-      <p class="eyebrow">הפקת מקור של בארבי</p>
+      <p class="eyebrow">הפקת מקור של בארבי וחתול בשק</p>
       <h1>שמחה גדולה הלילה</h1>
       <p class="sub">חאפלה מזרח תיכון</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">כרטיסים ל־26.10</a>
-        <a class="btn btn-ghost" href="#videos">לצפייה בסרטונים</a>
+        <a class="btn btn-gold" href="#videos">לצפייה בסרטונים</a>
       </div>
     </div>
   </div>
 </div>
 <div class="fringe" aria-hidden="true"></div>
 
-<div class="next">
-  <div class="wrap">
-    <div class="date">26.10<small>יום שני · 2026</small></div>
-    <ul class="facts">
-      <li><b>פתיחת דלתות</b><span>21:00</span></li>
-      <li><b>תחילת המופע</b><span>כשעה אחרי פתיחת הדלתות</span></li>
-      <li><b>סוג המופע</b><span>מופע עמידה</span></li>
-      <li><b>מקום</b><span>בארבי, הנמל 1, נמל יפו</span></li>
-    </ul>
-    <a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
-    <p class="note">הכרטיסים לערב של 29.11.2025 אזלו ונפתחה לו רשימת המתנה. כדאי לא לחכות.</p>
-  </div>
-</div>
-
 <section id="about">
   <div class="wrap">
     <p class="kicker">מה קורה בערב</p>
-    <h2>אולם שמחות על במת בארבי</h2>
-    <p class="lead">שמחה גדולה הלילה היא הפקת מקור של בארבי, מבית הליין של חתול בשק. להקה חיה מנגנת עיבודים חדשים לשירי הזמר הים־תיכוני הקלאסי, זמרים וזמרות עולים לבמה אחד אחרי השני, והקהל בקומת העמידה שר ורוקד מהשיר הראשון עד האחרון.</p>
+    <h2>להקה חיה, זמרים בהפתעה וקהל שלא מפסיק לשיר</h2>
+    <p class="lead">שמחה גדולה הלילה היא הפקת מקור של בארבי וחתול בשק. להקה חיה מנגנת עיבודים חדשים לשירי הזמר הים־תיכוני הקלאסי, זמרים וזמרות עולים לבמה אחד אחרי השני, והקהל בקומת העמידה שר ורוקד מהשיר הראשון עד האחרון.</p>
     <div class="stage">
       <article>
         <h3>הלהקה</h3>
@@ -231,11 +227,6 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
         <h3>הקהל</h3>
         <p>מופע עמידה בפורמט של חאפלה. הדלתות נפתחות, ההופעה מתחילה כשעה אחר כך, ומשם זה ערב אחד ארוך של שירה בציבור, ריקודים ושמחה.</p>
       </article>
-    </div>
-    <div class="tally">
-      <div><strong dir="ltr">13+</strong><span>ערבים בבארבי מאז יוני 2023</span></div>
-      <div><strong>7</strong><span>זמרים וזמרות על הבמה בערב המלך, 31.8.2026</span></div>
-      <div><strong>302K</strong><span>צפיות לסרטון של ספיישל המלך בעמוד של בארבי</span></div>
     </div>
   </div>
 </section>
@@ -276,7 +267,6 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       <li><time>29.11.2025</time><p>סולד אאוט ורשימת המתנה.</p></li>
       <li><time>מאי 2026</time><p>שמחה גדולה הלילה – המלך.</p></li>
       <li class="hi"><time>30–31.8.2026</time><p>המלך בשני ערבים: 12 נגנים ו־7 זמרים בעיבודים מיוחדים לשירי זוהר ארגוב.</p></li>
-      <li class="hi next-mark"><time>26.10.2026</time><p>הערב הבא. <a href="https://barby.co.il/show/5513" target="_blank" rel="noopener" style="color:var(--gold-hi)">כרטיסים באתר בארבי</a></p></li>
     </ol>
   </div>
 </section>
@@ -285,18 +275,21 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   <div class="wrap">
     <img src="img/poster.jpg" alt="פוסטר שמחה גדולה הלילה – חאפלה מזרח תיכון, בארבי" width="900" height="781" loading="lazy">
     <div>
-      <p class="kicker">יום שני · 26.10.2026</p>
+      <p class="kicker">בארבי · נמל יפו</p>
       <h2>נתראה בחאפלה</h2>
-      <p class="lead">פתיחת דלתות ב־21:00, מופע עמידה. הכרטיסים באתר בארבי.</p>
-      <div style="margin-top:24px"><a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a></div>
-      <p class="addr"><b>בארבי</b> · הנמל 1, נמל יפו · 03-5188123</p>
+      <p class="lead">הפקת מקור של בארבי וחתול בשק. מופע עמידה בבארבי, הנמל 1, נמל יפו.</p>
+      <div class="logos logos-lg">
+        <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131" loading="lazy">
+        <img src="img/logo-hatul-basak.jpg" alt="חתול בשק" class="lg-round" width="200" height="200" loading="lazy">
+        <img src="img/logo-algorithm.jpg" alt="אלגוריתם הפקות" class="lg-round" width="200" height="200" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>שמחה גדולה הלילה · הפקת מקור של בארבי</span>
+    <span>שמחה גדולה הלילה · הפקת מקור של בארבי וחתול בשק</span>
     <span>הסרטונים צולמו בערבים קודמים בבארבי</span>
   </div>
 </footer>
@@ -313,7 +306,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 </dialog>
 
 <script>
-const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך", "label": "302 אלף צפיות בפייסבוק"}, {"f": "c02", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c03", "w": 480, "h": 854, "date": "29.11.2025", "label": "ככה זה נראה"}, {"f": "c04", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c05", "w": 480, "h": 854, "date": "31.8.2026", "label": "ספיישל זוהר ארגוב · 12 נגנים, 7 זמרים"}, {"f": "c06", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c07", "w": 854, "h": 480, "date": "26.1.2025", "label": "עושים חפלה בבארבי"}, {"f": "c08", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c09", "w": 480, "h": 854, "date": "31.5.2025", "label": "ספיישל שבועות"}, {"f": "c10", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c11", "w": 600, "h": 600, "date": "30.6.2025", "label": "6 זמרים וזמרות בהפתעה"}, {"f": "c12", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c13", "w": 854, "h": 480, "date": "", "label": "ככה נראית שמחה"}, {"f": "c14", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c15", "w": 854, "h": 480, "date": "", "label": "שמחה גדולה הלילה"}, {"f": "c16", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c17", "w": 480, "h": 854, "date": "שבועות 2025", "label": "תודה לכל מי שבא לחגוג"}, {"f": "c18", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c19", "w": 480, "h": 854, "date": "אוגוסט 2025", "label": "החאפלה הכי יפה בארץ?"}, {"f": "c20", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c21", "w": 480, "h": 854, "date": "", "label": "הערב, שמחה גדולה הלילה"}, {"f": "c22", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c23", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c24", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c25", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c26", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c27", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c28", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c29", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c30", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c31", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c32", "w": 480, "h": 854, "date": "", "label": ""}];
+const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך", "label": "302 אלף צפיות בפייסבוק"}, {"f": "c02", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c03", "w": 480, "h": 854, "date": "29.11.2025", "label": "ככה זה נראה"}, {"f": "c04", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c05", "w": 480, "h": 854, "date": "31.8.2026", "label": "ספיישל זוהר ארגוב · 12 נגנים, 7 זמרים"}, {"f": "c06", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c07", "w": 854, "h": 480, "date": "26.1.2025", "label": "עושים חפלה בבארבי"}, {"f": "c08", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c09", "w": 480, "h": 854, "date": "31.5.2025", "label": "ספיישל שבועות"}, {"f": "c10", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c11", "w": 600, "h": 600, "date": "30.6.2025", "label": "6 זמרים וזמרות בהפתעה"}, {"f": "c12", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c13", "w": 854, "h": 480, "date": "", "label": "ככה נראית שמחה"}, {"f": "c14", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c15", "w": 854, "h": 480, "date": "", "label": "שמחה גדולה הלילה"}, {"f": "c16", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c17", "w": 480, "h": 854, "date": "שבועות 2025", "label": "תודה לכל מי שבא לחגוג"}, {"f": "c18", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c19", "w": 480, "h": 854, "date": "אוגוסט 2025", "label": "החאפלה הכי יפה בארץ?"}, {"f": "c20", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c21", "w": 480, "h": 854, "date": "", "label": "הערב, שמחה גדולה הלילה"}, {"f": "c22", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c23", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c24", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c26", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c27", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c28", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c29", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c30", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c31", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c32", "w": 480, "h": 854, "date": "", "label": ""}];
 
 (function(){
   // hero: tall cut on portrait screens, wide cut elsewhere
@@ -329,6 +322,9 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
     hv.play().catch(()=>{});
   }
   setHero();
+  const kick = () => { if (hv.paused) hv.play().catch(()=>{}); };
+  ['touchstart','scroll','click'].forEach(ev => window.addEventListener(ev, kick, {passive:true, once:true}));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
   mq.addEventListener ? mq.addEventListener('change', setHero) : mq.addListener(setHero);
 
   const sb = document.getElementById('soundBtn'), sl = document.getElementById('soundLabel'), sw = document.getElementById('soundWave');
@@ -343,17 +339,23 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
   // video wall
   const wall = document.getElementById('wall');
   document.getElementById('wallCount').textContent = VIDEOS.length + ' סרטונים מהבמה ומהקהל';
-  const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const tileVideos = [];
   VIDEOS.forEach((v, i) => {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'tile';
-    b.setAttribute('aria-label', 'צפייה בסרטון' + (v.label ? ': ' + v.label : ' ' + (i+1)));
+    b.setAttribute('aria-label', 'צפייה בסרטון עם סאונד' + (v.label ? ': ' + v.label : ' ' + (i+1)));
     const img = document.createElement('img');
     img.src = 'v/' + v.f + '.jpg'; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
     img.width = v.w; img.height = v.h;
     img.style.aspectRatio = v.w + '/' + v.h;
     b.appendChild(img);
+    const pv = document.createElement('video');
+    pv.muted = true; pv.defaultMuted = true; pv.loop = true; pv.playsInline = true;
+    pv.setAttribute('muted', ''); pv.setAttribute('playsinline', ''); pv.setAttribute('webkit-playsinline', '');
+    pv.preload = 'none'; pv.dataset.src = 'v/' + v.f + '.mp4';
+    pv.addEventListener('playing', () => b.classList.add('previewing'));
+    b.appendChild(pv); tileVideos.push(pv);
     const shade = document.createElement('span'); shade.className = 'shade'; b.appendChild(shade);
     const play = document.createElement('span'); play.className = 'play';
     play.innerHTML = '<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>';
@@ -365,16 +367,22 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
       b.appendChild(cap);
     }
     b.addEventListener('click', () => openLb(i));
-    if (finePointer){
-      let pv = null;
-      b.addEventListener('pointerenter', () => {
-        if (!pv){ pv = document.createElement('video'); pv.muted = true; pv.loop = true; pv.playsInline = true; pv.preload = 'none'; pv.src = 'v/' + v.f + '.mp4'; b.insertBefore(pv, shade); }
-        pv.play().then(()=>b.classList.add('previewing')).catch(()=>{});
-      });
-      b.addEventListener('pointerleave', () => { if (pv){ pv.pause(); b.classList.remove('previewing'); } });
-    }
     wall.appendChild(b);
   });
+
+  // tiles play muted while on screen
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const vid = e.target.querySelector('video');
+        if (e.isIntersecting && !document.getElementById('lb').open){
+          if (!vid.src) vid.src = vid.dataset.src;
+          vid.play().catch(()=>{});
+        } else { vid.pause(); }
+      });
+    }, {threshold: 0.35});
+    document.querySelectorAll('.tile').forEach(t => io.observe(t));
+  }
 
   // lightbox
   const lb = document.getElementById('lb'), lv = document.getElementById('lbVideo'), lc = document.getElementById('lbCap');
@@ -390,6 +398,7 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
   }
   function openLb(i){
     hv.pause();
+    document.querySelectorAll('.tile video').forEach(x => x.pause());
     if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open','');
     show(i);
   }
