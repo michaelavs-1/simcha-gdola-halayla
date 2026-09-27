@@ -354,7 +354,8 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
     pv.muted = true; pv.defaultMuted = true; pv.loop = true; pv.playsInline = true;
     pv.setAttribute('muted', ''); pv.setAttribute('playsinline', ''); pv.setAttribute('webkit-playsinline', '');
     pv.preload = 'none'; pv.dataset.src = 'v/' + v.f + '.mp4';
-    pv.addEventListener('playing', () => b.classList.add('previewing'));
+    pv.poster = 'v/' + v.f + '.jpg';
+    pv.addEventListener('timeupdate', () => { if (pv.currentTime > 0.05) b.classList.add('previewing'); });
     b.appendChild(pv); tileVideos.push(pv);
     const shade = document.createElement('span'); shade.className = 'shade'; b.appendChild(shade);
     const play = document.createElement('span'); play.className = 'play';
