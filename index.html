@@ -34,6 +34,7 @@
   --maxw:1180px;
 }
 *{box-sizing:border-box}
+img{max-width:100%;height:auto}
 html{background:var(--ink)}
 body{background:var(--ink);color:var(--cream);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
 a{color:inherit}
@@ -60,10 +61,12 @@ a{color:inherit}
 .logos-lg .lg-barby{height:52px;width:auto}
 .logos-lg .lg-round{height:76px;width:76px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
 /* hero */
-.hero{position:relative;background:#000;overflow:hidden}
-.hero video{display:block;width:100%;height:auto;max-height:86vh;object-fit:cover;aspect-ratio:16/9}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,19,.96) 0%,rgba(10,13,19,.55) 38%,rgba(10,13,19,0) 70%),linear-gradient(90deg,rgba(10,13,19,0) 40%,rgba(10,13,19,.55) 100%);pointer-events:none}
-.hero-copy{position:absolute;inset-inline:0;bottom:0;z-index:2;padding-block:0 clamp(20px,4vw,48px)}
+.hero{position:relative;background:#000;overflow:hidden;height:clamp(560px,84vh,860px)}
+.hero-bg{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(30px) brightness(.42) saturate(1.2);pointer-events:none}
+#heroVideo{position:absolute;top:0;bottom:0;inset-inline-end:max(var(--gutter),calc((100% - var(--maxw))/2 + var(--gutter)));height:100%;width:auto;aspect-ratio:9/16;object-fit:cover;z-index:1;box-shadow:0 0 0 1px var(--line),0 30px 80px -20px rgba(0,0,0,.8)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,19,.9) 0%,rgba(10,13,19,0) 45%);pointer-events:none;z-index:1}
+.hero-copy{position:absolute;inset-inline:0;bottom:0;z-index:2;padding-block:0 clamp(28px,5vw,64px)}
+.hero-copy .wrap > *{max-width:min(560px,52%)}
 .eyebrow{font-family:var(--cond);font-size:clamp(20px,2.4vw,28px);letter-spacing:.06em;color:var(--gold);margin:0 0 4px}
 h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,9.4vw,132px);line-height:.92;margin:0;text-wrap:balance;
   background:linear-gradient(100deg,var(--brass) 0%,var(--gold) 22%,var(--gold-hi) 38%,var(--gold) 52%,var(--brass) 100%);background-size:220% 100%;background-position:100% 0;
@@ -124,7 +127,7 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,58px);lin
 
 /* history */
 .history{background:var(--velvet)}
-.history-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:start}
+.history-grid{display:block}
 .guests{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
 .guests li{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:15px}
 .timeline{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
@@ -138,7 +141,7 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,58px);lin
 
 /* final */
 .final .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
-.final img{width:100%;border-radius:6px;border:1px solid var(--line)}
+.final img{width:100%;height:auto;aspect-ratio:1600/1389;object-fit:contain;border-radius:6px;border:1px solid var(--line)}
 .addr{margin-top:20px;color:var(--muted);font-size:16px}
 .addr b{color:var(--cream);font-weight:600}
 footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:14px}
@@ -170,8 +173,11 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .logos-sm{gap:8px}
   .logos-sm .lg-barby{height:22px}
   .logos-sm .lg-round{height:30px;width:30px}
-  .hero video{aspect-ratio:9/16;max-height:82svh}
-  .hero::after{background:linear-gradient(0deg,rgba(10,13,19,.97) 0%,rgba(10,13,19,.6) 34%,rgba(10,13,19,0) 62%)}
+  .hero{height:auto}
+  .hero-bg{display:none}
+  #heroVideo{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:86svh;box-shadow:none}
+  .hero-copy .wrap > *{max-width:none}
+  .hero::after{background:linear-gradient(0deg,rgba(10,13,19,.97) 0%,rgba(10,13,19,.6) 30%,rgba(10,13,19,0) 55%)}
   .hero-copy{padding-bottom:22px}
   .eyebrow{font-size:19px}
   h1{font-size:clamp(46px,14vw,64px)}
@@ -230,7 +236,8 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 </header>
 
 <div class="hero" id="top">
-  <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="v/hero_wide.jpg"></video>
+  <video class="hero-bg" src="v/hero_main.mp4" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true" tabindex="-1"></video>
+  <video id="heroVideo" src="v/hero_main.mp4" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="v/hero_main.jpg"></video>
   <button class="sound" id="soundBtn" type="button" aria-pressed="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="soundWave" d="M17 9l4 6M21 9l-4 6"/></svg>
     <span id="soundLabel">הפעלת סאונד</span>
@@ -288,25 +295,8 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     <div>
       <p class="kicker">היסטוריה קצרה</p>
       <h2>מניסוי של ערב אחד לליין קבוע</h2>
-      <p class="lead">הערב הראשון עלה ביוני 2023 כגרסה מזרחית של חתול בשק, וכבר אז נקרא שמחה גדולה הלילה: תזמורת פירקת אל נור בניצוח אריאל כהן ארחה את אלי לוזון, שריף וריימונד אבקסיס. מאז הליין חוזר לבארבי כמה פעמים בשנה, עם ערבי חג, ספיישלים לזוהר ארגוב וערבים כפולים.</p>
-      <ul class="guests" aria-label="אורחים שהופיעו בערבים">
-        <li>אלי לוזון</li><li>שימי תבורי</li><li>שריף</li><li>ריימונד אבקסיס</li><li>גאידה</li><li>אמנון ארגוב</li>
-      </ul>
-      <p class="src">חלק מהאורחים שהופיעו בערבים, לפי ביקורות ופרסומים של בארבי.</p>
+      <p class="lead">הערב הראשון עלה ביוני 2023 כגרסה מזרחית של חתול בשק, וכבר אז נקרא שמחה גדולה הלילה. מאז הליין חוזר לבארבי כל חודשיים למופע כפול, ספיישלים לזוהר ארגוב וערבי מחווה מיוחדים.</p>
     </div>
-    <ol class="timeline">
-      <li><time>12.6.2023</time><p>הערב הראשון, בליין של חתול בשק. פירקת אל נור עם אלי לוזון, שריף וריימונד אבקסיס.</p></li>
-      <li><time>21.8.2023</time><p>שימי תבורי, אלי לוזון וגאידה, כמעט שעתיים של להיטים.</p></li>
-      <li><time>26–27.1.2025</time><p>שני ערבים רצופים של חפלה מזרח תיכונית.</p></li>
-      <li><time>30.3.2025</time><p>חוזרים לבארבי לערב נוסף.</p></li>
-      <li><time>31.5.2025</time><p>ספיישל שבועות, עם קוד לבוש לבן.</p></li>
-      <li><time>30.6.2025</time><p>שישה זמרים וזמרות בהפתעה, ערב כבוד לזמר הים־תיכוני.</p></li>
-      <li><time>אוגוסט 2025</time><p>ערב קיץ בבארבי.</p></li>
-      <li class="hi"><time>27.10.2025</time><p>ספיישל זוהר ארגוב, עם אמנון ארגוב כאורח כבוד.</p></li>
-      <li><time>29.11.2025</time><p>סולד אאוט ורשימת המתנה.</p></li>
-      <li><time>מאי 2026</time><p>שמחה גדולה הלילה – המלך.</p></li>
-      <li class="hi"><time>30–31.8.2026</time><p>המלך בשני ערבים: 12 נגנים ו־7 זמרים בעיבודים מיוחדים לשירי זוהר ארגוב.</p></li>
-    </ol>
   </div>
 </section>
 
@@ -316,7 +306,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     <div>
       <p class="kicker">בארבי · נמל יפו</p>
       <h2>נתראה בחאפלה</h2>
-      <p class="lead">הפקת מקור של בארבי וחתול בשק. מופע עמידה בבארבי, הנמל 1, נמל יפו.</p>
+      <p class="lead">הפקת מקור של בארבי וחתול בשק.</p>
       <div class="logos logos-lg">
         <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131" loading="lazy">
         <img src="img/logo-hatul-basak.jpg" alt="חתול בשק" class="lg-round" width="200" height="200" loading="lazy">
@@ -345,26 +335,15 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 </dialog>
 
 <script>
-const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך", "label": "302 אלף צפיות בפייסבוק"}, {"f": "c02", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c03", "w": 480, "h": 854, "date": "29.11.2025", "label": "ככה זה נראה"}, {"f": "c04", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c05", "w": 480, "h": 854, "date": "31.8.2026", "label": "ספיישל זוהר ארגוב · 12 נגנים, 7 זמרים"}, {"f": "c06", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c07", "w": 854, "h": 480, "date": "26.1.2025", "label": "עושים חפלה בבארבי"}, {"f": "c08", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c09", "w": 480, "h": 854, "date": "31.5.2025", "label": "ספיישל שבועות"}, {"f": "c10", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c11", "w": 600, "h": 600, "date": "30.6.2025", "label": "6 זמרים וזמרות בהפתעה"}, {"f": "c12", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c14", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c17", "w": 480, "h": 854, "date": "שבועות 2025", "label": "תודה לכל מי שבא לחגוג"}, {"f": "c19", "w": 480, "h": 854, "date": "אוגוסט 2025", "label": "החאפלה הכי יפה בארץ?"}, {"f": "c20", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c21", "w": 480, "h": 854, "date": "", "label": "הערב, שמחה גדולה הלילה"}, {"f": "c22", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c23", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c24", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c27", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c29", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c30", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c31", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c32", "w": 480, "h": 854, "date": "", "label": ""}];
+const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""}, {"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך", "label": "302 אלף צפיות בפייסבוק"}, {"f": "c02", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c03", "w": 480, "h": 854, "date": "29.11.2025", "label": "ככה זה נראה"}, {"f": "c04", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c05", "w": 480, "h": 854, "date": "31.8.2026", "label": "ספיישל זוהר ארגוב · 12 נגנים, 7 זמרים"}, {"f": "c06", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c07", "w": 854, "h": 480, "date": "26.1.2025", "label": "עושים חפלה בבארבי"}, {"f": "c08", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c09", "w": 480, "h": 854, "date": "31.5.2025", "label": "ספיישל שבועות"}, {"f": "c10", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c11", "w": 600, "h": 600, "date": "30.6.2025", "label": "6 זמרים וזמרות בהפתעה"}, {"f": "c12", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c14", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c17", "w": 480, "h": 854, "date": "שבועות 2025", "label": "תודה לכל מי שבא לחגוג"}, {"f": "c19", "w": 480, "h": 854, "date": "אוגוסט 2025", "label": "החאפלה הכי יפה בארץ?"}, {"f": "c20", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c21", "w": 480, "h": 854, "date": "", "label": "הערב, שמחה גדולה הלילה"}, {"f": "c22", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c23", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c24", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c27", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c29", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c31", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c32", "w": 480, "h": 854, "date": "", "label": ""}];
 
 (function(){
-  // hero: tall cut on portrait screens, wide cut elsewhere
   const hv = document.getElementById('heroVideo');
-  const mq = window.matchMedia('(max-width:640px)');
-  function setHero(){
-    const tall = mq.matches;
-    const src = tall ? 'v/hero_tall.mp4' : 'v/hero_wide.mp4';
-    if (hv.dataset.src === src) return;
-    hv.dataset.src = src;
-    hv.poster = tall ? 'v/hero_tall.jpg' : 'v/hero_wide.jpg';
-    hv.src = src;
-    hv.play().catch(()=>{});
-  }
-  setHero();
-  const kick = () => { if (hv.paused) hv.play().catch(()=>{}); };
+  const hbg = document.querySelector('.hero-bg');
+  hv.play().catch(()=>{});
+  const kick = () => { if (hv.paused) hv.play().catch(()=>{}); if (hbg && hbg.paused && getComputedStyle(hbg).display !== 'none') hbg.play().catch(()=>{}); };
   ['touchstart','scroll','click'].forEach(ev => window.addEventListener(ev, kick, {passive:true, once:true}));
   document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
-  mq.addEventListener ? mq.addEventListener('change', setHero) : mq.addListener(setHero);
 
   const sb = document.getElementById('soundBtn'), sl = document.getElementById('soundLabel'), sw = document.getElementById('soundWave');
   sb.addEventListener('click', ()=>{
