@@ -53,13 +53,15 @@ a{color:inherit}
 .btn-sm{padding:8px 18px;font-size:15px}
 .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
 
-.logos{display:flex;align-items:center;gap:12px}
-.logos img{display:block;max-width:100%}
-.logos-sm .lg-barby{height:30px;width:auto}
-.logos-sm .lg-round{height:36px;width:36px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
-.logos-lg{margin-top:28px;gap:22px;flex-wrap:wrap}
-.logos-lg .lg-barby{height:52px;width:auto}
-.logos-lg .lg-round{height:76px;width:76px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+.logos{display:flex;align-items:center;gap:22px}
+.logos img{display:block;max-width:100%;width:auto;object-fit:contain}
+.logos-sm .lg-barby{height:42px}
+.logos-sm .lg-hatul{height:40px}
+.logos-sm .lg-algo{height:50px}
+.logos-lg{margin-top:34px;gap:34px;flex-wrap:wrap}
+.logos-lg .lg-barby{height:78px}
+.logos-lg .lg-hatul{height:74px}
+.logos-lg .lg-algo{height:104px}
 /* hero */
 .hero{position:relative;background:#000;overflow:hidden;height:clamp(560px,84vh,860px)}
 .hero-bg{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(30px) brightness(.42) saturate(1.2);pointer-events:none}
@@ -141,7 +143,7 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,58px);lin
 
 /* final */
 .final .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
-.final img{width:100%;height:auto;aspect-ratio:1600/1389;object-fit:contain;border-radius:6px;border:1px solid var(--line)}
+.final .poster{width:100%;height:auto;aspect-ratio:1600/1389;object-fit:contain;border-radius:6px;border:1px solid var(--line)}
 .addr{margin-top:20px;color:var(--muted);font-size:16px}
 .addr b{color:var(--cream);font-weight:600}
 footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:14px}
@@ -163,16 +165,17 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .stage{grid-template-columns:1fr}
   .history-grid,.final .wrap{grid-template-columns:1fr}
   .next .wrap{grid-template-columns:1fr;gap:14px}
-  .final img{max-width:520px}
+  .final .poster{max-width:520px}
 }
 @media (max-width:640px){
   body{font-size:16px}
   .bar .wrap{padding-block:8px;gap:10px}
   .bar .brand{font-size:22px;white-space:nowrap}
   .bar .brand span{display:none}
-  .logos-sm{gap:8px}
-  .logos-sm .lg-barby{height:22px}
-  .logos-sm .lg-round{height:30px;width:30px}
+  .logos-sm{gap:10px}
+  .logos-sm .lg-barby{height:26px}
+  .logos-sm .lg-hatul{height:24px}
+  .logos-sm .lg-algo{height:32px}
   .hero{height:auto}
   .hero-bg{display:none}
   #heroVideo{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:86svh;box-shadow:none}
@@ -198,10 +201,11 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .timeline time{font-size:22px}
   .timeline p{font-size:15px}
   .guests li{font-size:14px;padding:4px 12px}
-  .final img{max-width:100%}
-  .logos-lg{justify-content:flex-start;gap:16px}
-  .logos-lg .lg-barby{height:40px}
-  .logos-lg .lg-round{height:62px;width:62px}
+  .final .poster{max-width:100%}
+  .logos-lg{justify-content:flex-start;gap:16px;flex-wrap:nowrap}
+  .logos-lg .lg-barby{height:46px}
+  .logos-lg .lg-hatul{height:42px}
+  .logos-lg .lg-algo{height:62px}
   footer .wrap{flex-direction:column;gap:6px}
   .lb-inner{padding:calc(62px + env(safe-area-inset-top,0px)) 8px calc(84px + env(safe-area-inset-bottom,0px))}
   .lb video{width:100%;max-height:100%}
@@ -212,8 +216,8 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 }
 @media (max-width:360px){
   .bar .brand{font-size:19px}
-  .logos-sm .lg-round{height:26px;width:26px}
-  .logos-sm .lg-barby{height:18px}
+  .bar .brand{display:none}
+  .logos-sm{margin-inline:auto}
 }
 @media (prefers-reduced-motion:reduce){
   h1{animation:none;background-position:30% 0}
@@ -229,8 +233,8 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     <div class="brand">שמחה גדולה הלילה<span>· בארבי נמל יפו</span></div>
     <div class="logos logos-sm">
       <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131">
-      <img src="img/logo-hatul-basak.jpg" alt="חתול בשק" class="lg-round" width="200" height="200">
-      <img src="img/logo-algorithm.jpg" alt="אלגוריתם הפקות" class="lg-round" width="200" height="200">
+      <img src="img/logo-hatul-basak.png" alt="חתול בשק" class="lg-hatul" width="560" height="255">
+      <img src="img/logo-algorithm.png" alt="אלגוריתם הפקות" class="lg-algo" width="431" height="520">
     </div>
   </div>
 </header>
@@ -238,9 +242,9 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 <div class="hero" id="top">
   <video class="hero-bg" src="v/hero_main.mp4" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true" tabindex="-1"></video>
   <video id="heroVideo" src="v/hero_main.mp4" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="v/hero_main.jpg"></video>
-  <button class="sound" id="soundBtn" type="button" aria-pressed="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="soundWave" d="M17 9l4 6M21 9l-4 6"/></svg>
-    <span id="soundLabel">הפעלת סאונד</span>
+  <button class="sound" id="soundBtn" type="button" aria-pressed="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="soundWave" d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14"/></svg>
+    <span id="soundLabel">השתקה</span>
   </button>
   <div class="hero-copy">
     <div class="wrap">
@@ -259,7 +263,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   <div class="wrap">
     <p class="kicker">מה קורה בערב</p>
     <h2>להקה חיה, זמרים בהפתעה וקהל שלא מפסיק לשיר</h2>
-    <p class="lead">שמחה גדולה הלילה היא הפקת מקור של בארבי וחתול בשק. להקה חיה מנגנת עיבודים חדשים לשירי הזמר הים־תיכוני הקלאסי, זמרים וזמרות עולים לבמה אחד אחרי השני, והקהל בקומת העמידה שר ורוקד מהשיר הראשון עד האחרון.</p>
+    <p class="lead">שמחה גדולה הלילה היא הפקת מקור של בארבי וחתול בשק. להקה חיה מנגנת עיבודים חדשים לשירי הזמר הים־תיכוני הקלאסי, זמרים וזמרות עולים לבמה אחד אחרי השני, והקהל שר ורוקד מהשיר הראשון עד האחרון.</p>
     <div class="stage">
       <article>
         <h3>הלהקה</h3>
@@ -271,7 +275,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       </article>
       <article>
         <h3>הקהל</h3>
-        <p>מופע עמידה בפורמט של חאפלה. הדלתות נפתחות, ההופעה מתחילה כשעה אחר כך, ומשם זה ערב אחד ארוך של שירה בציבור, ריקודים ושמחה.</p>
+        <p>מופע עמידה בפורמט של חאפלה. הדלתות נפתחות, ההופעה מתחילה כשעה אחר כך, ומשם זה ערב אחד ארוך של שירה, ריקודים ושמחה.</p>
       </article>
     </div>
   </div>
@@ -302,15 +306,15 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 
 <section class="final">
   <div class="wrap">
-    <img src="img/poster.jpg" alt="פוסטר שמחה גדולה הלילה – חאפלה מזרח תיכון, בארבי" width="900" height="781" loading="lazy">
+    <img class="poster" src="img/poster.jpg" alt="פוסטר שמחה גדולה הלילה – חאפלה מזרח תיכון, בארבי" width="900" height="781" loading="lazy">
     <div>
       <p class="kicker">בארבי · נמל יפו</p>
       <h2>נתראה בחאפלה</h2>
       <p class="lead">הפקת מקור של בארבי וחתול בשק.</p>
       <div class="logos logos-lg">
         <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131" loading="lazy">
-        <img src="img/logo-hatul-basak.jpg" alt="חתול בשק" class="lg-round" width="200" height="200" loading="lazy">
-        <img src="img/logo-algorithm.jpg" alt="אלגוריתם הפקות" class="lg-round" width="200" height="200" loading="lazy">
+        <img src="img/logo-hatul-basak.png" alt="חתול בשק" class="lg-hatul" width="560" height="255" loading="lazy">
+        <img src="img/logo-algorithm.png" alt="אלגוריתם הפקות" class="lg-algo" width="431" height="520" loading="lazy">
       </div>
     </div>
   </div>
@@ -340,19 +344,46 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
 (function(){
   const hv = document.getElementById('heroVideo');
   const hbg = document.querySelector('.hero-bg');
-  hv.play().catch(()=>{});
-  const kick = () => { if (hv.paused) hv.play().catch(()=>{}); if (hbg && hbg.paused && getComputedStyle(hbg).display !== 'none') hbg.play().catch(()=>{}); };
-  ['touchstart','scroll','click'].forEach(ev => window.addEventListener(ev, kick, {passive:true, once:true}));
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
-
   const sb = document.getElementById('soundBtn'), sl = document.getElementById('soundLabel'), sw = document.getElementById('soundWave');
-  sb.addEventListener('click', ()=>{
-    hv.muted = !hv.muted;
-    if (!hv.muted) hv.play().catch(()=>{});
-    sb.setAttribute('aria-pressed', String(!hv.muted));
-    sl.textContent = hv.muted ? 'הפעלת סאונד' : 'השתקה';
-    sw.setAttribute('d', hv.muted ? 'M17 9l4 6M21 9l-4 6' : 'M16 8a5 5 0 010 8M19 5a9 9 0 010 14');
+  let wantSound = true;           // default: sound on
+  let userMuted = false;          // set only when the viewer presses the button
+  let started = false;
+  function paint(){
+    const on = !hv.muted;
+    sb.setAttribute('aria-pressed', String(on));
+    sl.textContent = on ? 'השתקה' : 'הפעלת סאונד';
+    sw.setAttribute('d', on ? 'M16 8a5 5 0 010 8M19 5a9 9 0 010 14' : 'M17 9l4 6M21 9l-4 6');
+  }
+  function startHero(){
+    if (!started && hv.readyState >= 1 && hv.duration > 4) { try { hv.currentTime = 2.8; } catch(e){} started = true; }
+    hv.muted = !wantSound;
+    hv.play().then(paint).catch(() => { hv.muted = true; hv.play().catch(()=>{}); paint(); });
+  }
+  hv.addEventListener('loadedmetadata', () => { if (!started) { try { hv.currentTime = 2.8; } catch(e){} started = true; } }, {once:true});
+  startHero();
+  // browsers block sound until the first interaction: turn it on at the first touch, click or key press
+  const unlock = (ev) => {
+    if (ev && ev.target && ev.target.closest && ev.target.closest('#soundBtn')) return;
+    if (!userMuted && hv.muted && !(document.getElementById('lb').open)) { hv.muted = false; hv.play().then(paint).catch(()=>{ hv.muted = true; paint(); }); }
+    if (hbg && hbg.paused && getComputedStyle(hbg).display !== 'none') hbg.play().catch(()=>{});
+  };
+  ['pointerdown','touchstart','keydown','click'].forEach(ev => window.addEventListener(ev, unlock, {passive:true, capture:true}));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && hv.paused && !document.getElementById('lb').open) hv.play().catch(()=>{}); });
+  sb.addEventListener('click', e => {
+    e.stopPropagation();
+    if (hv.muted) { userMuted = false; wantSound = true; hv.muted = false; hv.play().catch(()=>{}); }
+    else { userMuted = true; wantSound = false; hv.muted = true; }
+    paint();
   });
+  // mute the opening clip while it is off screen, restore when back
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => {
+      if (document.getElementById('lb').open) return;
+      if (e.isIntersecting) { if (!userMuted && wantSound) { hv.muted = false; } hv.play().catch(()=>{ hv.muted = true; hv.play().catch(()=>{}); }); }
+      else { hv.muted = true; }
+      paint();
+    }), {threshold: 0.25}).observe(hv);
+  }
 
   // video wall
   const wall = document.getElementById('wall');
@@ -418,7 +449,7 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
   function closeLb(){
     lv.pause(); lv.removeAttribute('src'); lv.load();
     if (lb.open) lb.close();
-    hv.play().catch(()=>{});
+    hv.play().catch(()=>{}); paint();
   }
   document.getElementById('lbClose').addEventListener('click', closeLb);
   document.getElementById('lbNext').addEventListener('click', () => show(cur + 1));
