@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="שמחה גדולה הלילה · בארבי">
+<meta property="og:description" content="חאפלה מזרח תיכון, הפקת מקור של בארבי. יום שני 26.10.2026, בארבי נמל יפו.">
+<meta property="og:image" content="img/poster.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0d13">
+<title>שמחה גדולה הלילה</title>
+<meta name="description" content="שמחה גדולה הלילה — חאפלה מזרח תיכון, הפקת מקור של בארבי. הערב הבא: יום שני 26.10.2026, בארבי נמל יפו.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Karantina:wght@400;700&family=Assistant:wght@400;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --ink:#0a0d13;
+  --velvet:#111722;
+  --velvet-2:#18202d;
+  --gold:#d8b460;
+  --gold-hi:#f3dc9a;
+  --brass:#9a7634;
+  --cream:#efe4c4;
+  --muted:#aaa28c;
+  --line:rgba(216,180,96,.22);
+  --display:"Suez One","Frank Ruhl Libre",Georgia,serif;
+  --cond:"Karantina","Arial Narrow","Assistant",sans-serif;
+  --body:"Assistant","Segoe UI",Arial,sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{background:var(--ink);color:var(--cream);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.rtl{direction:rtl}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(10,13,19,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.bar .brand{font-family:var(--cond);font-size:26px;letter-spacing:.04em;color:var(--gold);line-height:1}
+.bar .brand span{color:var(--muted);font-size:20px;margin-inline-start:8px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:700;font-size:17px;text-decoration:none;border-radius:999px;padding:12px 26px;cursor:pointer;border:0;transition:transform .15s ease, background .2s ease}
+.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--brass));color:#1a1206;box-shadow:0 0 0 1px rgba(243,220,154,.5) inset,0 8px 30px -10px rgba(216,180,96,.7)}
+.btn-gold:hover{transform:translateY(-1px)}
+.btn-sm{padding:8px 18px;font-size:15px}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+
+/* hero */
+.hero{position:relative;background:#000;overflow:hidden}
+.hero video{display:block;width:100%;height:auto;max-height:86vh;object-fit:cover;aspect-ratio:16/9}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,19,.96) 0%,rgba(10,13,19,.55) 38%,rgba(10,13,19,0) 70%),linear-gradient(90deg,rgba(10,13,19,0) 40%,rgba(10,13,19,.55) 100%);pointer-events:none}
+.hero-copy{position:absolute;inset-inline:0;bottom:0;z-index:2;padding-block:0 clamp(20px,4vw,48px)}
+.eyebrow{font-family:var(--cond);font-size:clamp(20px,2.4vw,28px);letter-spacing:.06em;color:var(--gold);margin:0 0 4px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,9.4vw,132px);line-height:.92;margin:0;text-wrap:balance;
+  background:linear-gradient(100deg,var(--brass) 0%,var(--gold) 22%,var(--gold-hi) 38%,var(--gold) 52%,var(--brass) 100%);background-size:220% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 2.6s ease-out .3s both}
+@keyframes glint{from{background-position:100% 0}to{background-position:0% 0}}
+.hero .sub{font-family:var(--display);font-size:clamp(20px,2.6vw,32px);color:var(--cream);margin:10px 0 18px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.sound{position:absolute;z-index:3;top:16px;inset-inline-start:16px;background:rgba(10,13,19,.6);border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:8px 14px;font:600 14px var(--body);cursor:pointer;display:flex;gap:8px;align-items:center}
+.sound svg{width:18px;height:18px}
+
+/* fringe — chandelier crystals */
+.fringe{height:22px;background:
+  radial-gradient(circle at 50% 100%,var(--gold) 0 3px,transparent 3.5px) 0 0/28px 22px repeat-x,
+  linear-gradient(var(--line),var(--line)) 0 0/100% 1px no-repeat,
+  repeating-linear-gradient(90deg,transparent 0 13.5px,rgba(216,180,96,.35) 13.5px 14.5px,transparent 14.5px 28px) 0 0/100% 16px no-repeat;opacity:.8}
+
+/* next show */
+.next{background:var(--velvet);border-bottom:1px solid var(--line)}
+.next .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,4vw,48px);align-items:center;padding-block:clamp(22px,3.5vw,36px)}
+.date{font-family:var(--cond);font-weight:700;font-size:clamp(84px,11vw,128px);line-height:.8;color:var(--gold-hi);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.date small{display:block;font-size:.3em;font-weight:400;color:var(--gold);letter-spacing:.08em;margin-top:8px}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:18px}
+.facts li{display:flex;flex-direction:column}
+.facts b{font-family:var(--cond);font-weight:400;font-size:18px;letter-spacing:.08em;color:var(--muted)}
+.facts span{font-weight:700}
+.next .note{grid-column:1/-1;color:var(--muted);font-size:15px;margin:0}
+
+/* sections */
+section{padding-block:clamp(56px,8vw,104px)}
+.kicker{font-family:var(--cond);font-size:24px;letter-spacing:.08em;color:var(--gold);margin:0 0 6px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.05;margin:0 0 18px;color:var(--cream);text-wrap:balance}
+.lead{font-size:clamp(18px,1.6vw,21px);max-width:62ch;color:var(--cream);margin:0}
+.muted{color:var(--muted)}
+
+.stage{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px);margin-top:44px}
+.stage article{border-top:1px solid var(--line);padding-top:18px}
+.stage h3{font-family:var(--display);font-weight:400;font-size:26px;margin:0 0 8px;color:var(--gold-hi)}
+.stage p{margin:0;color:var(--cream);max-width:40ch}
+.tally{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:40px;padding:22px 0 0;border-top:1px solid var(--line)}
+.tally div{display:flex;align-items:baseline;gap:10px}
+.tally strong{font-family:var(--cond);font-weight:700;font-size:64px;line-height:.8;color:var(--gold);font-variant-numeric:tabular-nums}
+.tally span{color:var(--muted);font-size:16px;max-width:22ch;line-height:1.3}
+
+/* video wall */
+.wall-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px;margin-bottom:28px}
+.wall{columns:4 230px;column-gap:14px}
+.tile{break-inside:avoid;margin:0 0 14px;position:relative;border-radius:6px;overflow:hidden;background:var(--velvet-2);cursor:pointer;display:block;width:100%;padding:0;border:0;color:inherit;text-align:inherit}
+.tile img,.tile video{display:block;width:100%;height:auto;object-fit:cover}
+.tile video{position:absolute;inset:0;height:100%;opacity:0;transition:opacity .25s}
+.tile.previewing video{opacity:1}
+.tile .shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,19,.85),rgba(10,13,19,0) 45%);pointer-events:none}
+.tile .play{position:absolute;top:10px;inset-inline-end:10px;width:38px;height:38px;border-radius:50%;background:rgba(10,13,19,.55);border:1px solid rgba(243,220,154,.5);display:grid;place-items:center}
+.tile .play svg{width:14px;height:14px;fill:var(--gold-hi);transform:translateX(-1px) scaleX(-1)}
+.tile .cap{position:absolute;inset-inline:12px;bottom:10px;font-size:14px;line-height:1.3;font-weight:600}
+.tile .cap em{font-style:normal;font-family:var(--cond);font-size:20px;letter-spacing:.05em;color:var(--gold-hi);display:block;font-weight:400}
+.tile:hover .play{background:var(--gold);border-color:var(--gold)}
+.tile:hover .play svg{fill:#1a1206}
+
+/* history */
+.history{background:var(--velvet)}
+.history-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:start}
+.guests{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.guests li{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:15px}
+.timeline{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
+.timeline li{position:relative;padding:0 22px 20px;display:grid;grid-template-columns:118px 1fr;gap:4px 16px}
+.timeline li::before{content:"";position:absolute;inset-inline-start:-5px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--brass)}
+.timeline li.hi::before{background:var(--gold-hi);box-shadow:0 0 12px var(--gold)}
+.timeline time{font-family:var(--cond);font-size:24px;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.03em}
+.timeline p{margin:0;color:var(--cream);font-size:16px;line-height:1.45}
+.timeline .next-mark time{color:var(--gold-hi)}
+.src{font-size:13px;color:var(--muted);margin-top:18px}
+
+/* final */
+.final .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.final img{width:100%;border-radius:6px;border:1px solid var(--line)}
+.addr{margin-top:20px;color:var(--muted);font-size:16px}
+.addr b{color:var(--cream);font-weight:600}
+footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%;margin:0}
+dialog.lb::backdrop{background:rgba(5,7,10,.94)}
+.lb-inner{position:relative;width:100%;height:100%;display:grid;place-items:center;padding:56px 12px 76px}
+.lb video{max-width:min(100%,1100px);max-height:100%;width:auto;height:auto;border-radius:6px;background:#000}
+.lb-cap{position:absolute;bottom:22px;inset-inline:70px;text-align:center;color:var(--cream);font-size:15px}
+.lb-btn{position:absolute;background:rgba(17,23,34,.85);color:var(--cream);border:1px solid var(--line);border-radius:999px;width:46px;height:46px;display:grid;place-items:center;cursor:pointer;font:700 22px var(--body)}
+.lb-close{top:10px;inset-inline-start:12px}
+.lb-prev{bottom:14px;inset-inline-start:12px}
+.lb-next{bottom:14px;inset-inline-end:12px}
+
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr}
+  .history-grid,.final .wrap{grid-template-columns:1fr}
+  .next .wrap{grid-template-columns:1fr;gap:14px}
+  .final img{max-width:520px}
+}
+@media (max-width:640px){
+  .hero video{aspect-ratio:9/16;max-height:78vh}
+  .bar .brand span{display:none}
+  .wall{columns:2 150px;column-gap:10px}
+  .tile{margin-bottom:10px}
+  .tile .cap{font-size:13px}
+  .timeline li{grid-template-columns:1fr;padding-bottom:18px}
+  .tally strong{font-size:52px}
+}
+@media (prefers-reduced-motion:reduce){
+  h1{animation:none;background-position:30% 0}
+  .btn{transition:none}
+}
+</style>
+
+</head>
+<body>
+<div class="rtl">
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">שמחה גדולה הלילה<span>· בארבי נמל יפו</span></div>
+    <a class="btn btn-gold btn-sm" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לכרטיסים</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="v/hero_wide.jpg"></video>
+  <button class="sound" id="soundBtn" type="button" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="soundWave" d="M17 9l4 6M21 9l-4 6"/></svg>
+    <span id="soundLabel">הפעלת סאונד</span>
+  </button>
+  <div class="hero-copy">
+    <div class="wrap">
+      <p class="eyebrow">הפקת מקור של בארבי</p>
+      <h1>שמחה גדולה הלילה</h1>
+      <p class="sub">חאפלה מזרח תיכון</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">כרטיסים ל־26.10</a>
+        <a class="btn btn-ghost" href="#videos">לצפייה בסרטונים</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fringe" aria-hidden="true"></div>
+
+<div class="next">
+  <div class="wrap">
+    <div class="date">26.10<small>יום שני · 2026</small></div>
+    <ul class="facts">
+      <li><b>פתיחת דלתות</b><span>21:00</span></li>
+      <li><b>תחילת המופע</b><span>כשעה אחרי פתיחת הדלתות</span></li>
+      <li><b>סוג המופע</b><span>מופע עמידה</span></li>
+      <li><b>מקום</b><span>בארבי, הנמל 1, נמל יפו</span></li>
+    </ul>
+    <a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+    <p class="note">הכרטיסים לערב של 29.11.2025 אזלו ונפתחה לו רשימת המתנה. כדאי לא לחכות.</p>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <p class="kicker">מה קורה בערב</p>
+    <h2>אולם שמחות על במת בארבי</h2>
+    <p class="lead">שמחה גדולה הלילה היא הפקת מקור של בארבי, מבית הליין של חתול בשק. להקה חיה מנגנת עיבודים חדשים לשירי הזמר הים־תיכוני הקלאסי, זמרים וזמרות עולים לבמה אחד אחרי השני, והקהל בקומת העמידה שר ורוקד מהשיר הראשון עד האחרון.</p>
+    <div class="stage">
+      <article>
+        <h3>הלהקה</h3>
+        <p>הרכב גדול של נגנים חיים עם כלי מזרח ועיבודים שנכתבו במיוחד לערב. בערב המלך באוגוסט 2026 עלו לבמה 12 נגנים.</p>
+      </article>
+      <article>
+        <h3>הזמרים</h3>
+        <p>כמו בחתול בשק, הליינאפ לא מתפרסם מראש. כל זמר או זמרת עולים, שרים כמה שירים ומפנים את הבמה לבא בתור, ואת השם מגלים רק כשהוא כבר מול המיקרופון.</p>
+      </article>
+      <article>
+        <h3>הקהל</h3>
+        <p>מופע עמידה בפורמט של חאפלה. הדלתות נפתחות, ההופעה מתחילה כשעה אחר כך, ומשם זה ערב אחד ארוך של שירה בציבור, ריקודים ושמחה.</p>
+      </article>
+    </div>
+    <div class="tally">
+      <div><strong dir="ltr">13+</strong><span>ערבים בבארבי מאז יוני 2023</span></div>
+      <div><strong>7</strong><span>זמרים וזמרות על הבמה בערב המלך, 31.8.2026</span></div>
+      <div><strong>302K</strong><span>צפיות לסרטון של ספיישל המלך בעמוד של בארבי</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="videos" style="padding-top:0">
+  <div class="wrap">
+    <div class="wall-head">
+      <div>
+        <p class="kicker">מהערבים הקודמים</p>
+        <h2 style="margin:0">ככה זה נראה מהקהל</h2>
+      </div>
+      <p class="muted" style="margin:0" id="wallCount"></p>
+    </div>
+    <div class="wall" id="wall"></div>
+  </div>
+</section>
+
+<section class="history" id="history">
+  <div class="wrap history-grid">
+    <div>
+      <p class="kicker">היסטוריה קצרה</p>
+      <h2>מניסוי של ערב אחד לליין קבוע</h2>
+      <p class="lead">הערב הראשון עלה ביוני 2023 כגרסה מזרחית של חתול בשק, וכבר אז נקרא שמחה גדולה הלילה: תזמורת פירקת אל נור בניצוח אריאל כהן ארחה את אלי לוזון, שריף וריימונד אבקסיס. מאז הליין חוזר לבארבי כמה פעמים בשנה, עם ערבי חג, ספיישלים לזוהר ארגוב וערבים כפולים.</p>
+      <ul class="guests" aria-label="אורחים שהופיעו בערבים">
+        <li>אלי לוזון</li><li>שימי תבורי</li><li>שריף</li><li>ריימונד אבקסיס</li><li>גאידה</li><li>אמנון ארגוב</li>
+      </ul>
+      <p class="src">חלק מהאורחים שהופיעו בערבים, לפי ביקורות ופרסומים של בארבי.</p>
+    </div>
+    <ol class="timeline">
+      <li><time>12.6.2023</time><p>הערב הראשון, בליין של חתול בשק. פירקת אל נור עם אלי לוזון, שריף וריימונד אבקסיס.</p></li>
+      <li><time>21.8.2023</time><p>שימי תבורי, אלי לוזון וגאידה, כמעט שעתיים של להיטים.</p></li>
+      <li><time>26–27.1.2025</time><p>שני ערבים רצופים של חפלה מזרח תיכונית.</p></li>
+      <li><time>30.3.2025</time><p>חוזרים לבארבי לערב נוסף.</p></li>
+      <li><time>31.5.2025</time><p>ספיישל שבועות, עם קוד לבוש לבן.</p></li>
+      <li><time>30.6.2025</time><p>שישה זמרים וזמרות בהפתעה, ערב כבוד לזמר הים־תיכוני.</p></li>
+      <li><time>אוגוסט 2025</time><p>ערב קיץ בבארבי.</p></li>
+      <li class="hi"><time>27.10.2025</time><p>ספיישל זוהר ארגוב, עם אמנון ארגוב כאורח כבוד.</p></li>
+      <li><time>29.11.2025</time><p>סולד אאוט ורשימת המתנה.</p></li>
+      <li><time>מאי 2026</time><p>שמחה גדולה הלילה – המלך.</p></li>
+      <li class="hi"><time>30–31.8.2026</time><p>המלך בשני ערבים: 12 נגנים ו־7 זמרים בעיבודים מיוחדים לשירי זוהר ארגוב.</p></li>
+      <li class="hi next-mark"><time>26.10.2026</time><p>הערב הבא. <a href="https://barby.co.il/show/5513" target="_blank" rel="noopener" style="color:var(--gold-hi)">כרטיסים באתר בארבי</a></p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <img src="img/poster.jpg" alt="פוסטר שמחה גדולה הלילה – חאפלה מזרח תיכון, בארבי" width="900" height="781" loading="lazy">
+    <div>
+      <p class="kicker">יום שני · 26.10.2026</p>
+      <h2>נתראה בחאפלה</h2>
+      <p class="lead">פתיחת דלתות ב־21:00, מופע עמידה. הכרטיסים באתר בארבי.</p>
+      <div style="margin-top:24px"><a class="btn btn-gold" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a></div>
+      <p class="addr"><b>בארבי</b> · הנמל 1, נמל יפו · 03-5188123</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>שמחה גדולה הלילה · הפקת מקור של בארבי</span>
+    <span>הסרטונים צולמו בערבים קודמים בבארבי</span>
+  </div>
+</footer>
+</div>
+
+<dialog class="lb rtl" id="lb" aria-label="נגן וידאו">
+  <div class="lb-inner">
+    <video id="lbVideo" controls playsinline preload="auto"></video>
+    <p class="lb-cap" id="lbCap"></p>
+    <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="סגירה">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="הסרטון הקודם">›</button>
+    <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="הסרטון הבא">‹</button>
+  </div>
+</dialog>
+
+<script>
+const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך", "label": "302 אלף צפיות בפייסבוק"}, {"f": "c02", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c03", "w": 480, "h": 854, "date": "29.11.2025", "label": "ככה זה נראה"}, {"f": "c04", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c05", "w": 480, "h": 854, "date": "31.8.2026", "label": "ספיישל זוהר ארגוב · 12 נגנים, 7 זמרים"}, {"f": "c06", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c07", "w": 854, "h": 480, "date": "26.1.2025", "label": "עושים חפלה בבארבי"}, {"f": "c08", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c09", "w": 480, "h": 854, "date": "31.5.2025", "label": "ספיישל שבועות"}, {"f": "c10", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c11", "w": 600, "h": 600, "date": "30.6.2025", "label": "6 זמרים וזמרות בהפתעה"}, {"f": "c12", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c13", "w": 854, "h": 480, "date": "", "label": "ככה נראית שמחה"}, {"f": "c14", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c15", "w": 854, "h": 480, "date": "", "label": "שמחה גדולה הלילה"}, {"f": "c16", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c17", "w": 480, "h": 854, "date": "שבועות 2025", "label": "תודה לכל מי שבא לחגוג"}, {"f": "c18", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c19", "w": 480, "h": 854, "date": "אוגוסט 2025", "label": "החאפלה הכי יפה בארץ?"}, {"f": "c20", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c21", "w": 480, "h": 854, "date": "", "label": "הערב, שמחה גדולה הלילה"}, {"f": "c22", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c23", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c24", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c25", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c26", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c27", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c28", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c29", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c30", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c31", "w": 480, "h": 854, "date": "", "label": ""}, {"f": "c32", "w": 480, "h": 854, "date": "", "label": ""}];
+
+(function(){
+  // hero: tall cut on portrait screens, wide cut elsewhere
+  const hv = document.getElementById('heroVideo');
+  const mq = window.matchMedia('(max-width:640px)');
+  function setHero(){
+    const tall = mq.matches;
+    const src = tall ? 'v/hero_tall.mp4' : 'v/hero_wide.mp4';
+    if (hv.dataset.src === src) return;
+    hv.dataset.src = src;
+    hv.poster = tall ? 'v/hero_tall.jpg' : 'v/hero_wide.jpg';
+    hv.src = src;
+    hv.play().catch(()=>{});
+  }
+  setHero();
+  mq.addEventListener ? mq.addEventListener('change', setHero) : mq.addListener(setHero);
+
+  const sb = document.getElementById('soundBtn'), sl = document.getElementById('soundLabel'), sw = document.getElementById('soundWave');
+  sb.addEventListener('click', ()=>{
+    hv.muted = !hv.muted;
+    if (!hv.muted) hv.play().catch(()=>{});
+    sb.setAttribute('aria-pressed', String(!hv.muted));
+    sl.textContent = hv.muted ? 'הפעלת סאונד' : 'השתקה';
+    sw.setAttribute('d', hv.muted ? 'M17 9l4 6M21 9l-4 6' : 'M16 8a5 5 0 010 8M19 5a9 9 0 010 14');
+  });
+
+  // video wall
+  const wall = document.getElementById('wall');
+  document.getElementById('wallCount').textContent = VIDEOS.length + ' סרטונים מהבמה ומהקהל';
+  const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  VIDEOS.forEach((v, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tile';
+    b.setAttribute('aria-label', 'צפייה בסרטון' + (v.label ? ': ' + v.label : ' ' + (i+1)));
+    const img = document.createElement('img');
+    img.src = 'v/' + v.f + '.jpg'; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+    img.width = v.w; img.height = v.h;
+    img.style.aspectRatio = v.w + '/' + v.h;
+    b.appendChild(img);
+    const shade = document.createElement('span'); shade.className = 'shade'; b.appendChild(shade);
+    const play = document.createElement('span'); play.className = 'play';
+    play.innerHTML = '<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>';
+    b.appendChild(play);
+    if (v.date || v.label){
+      const cap = document.createElement('span'); cap.className = 'cap';
+      if (v.date){ const em = document.createElement('em'); em.textContent = v.date; cap.appendChild(em); }
+      if (v.label){ cap.appendChild(document.createTextNode(v.label)); }
+      b.appendChild(cap);
+    }
+    b.addEventListener('click', () => openLb(i));
+    if (finePointer){
+      let pv = null;
+      b.addEventListener('pointerenter', () => {
+        if (!pv){ pv = document.createElement('video'); pv.muted = true; pv.loop = true; pv.playsInline = true; pv.preload = 'none'; pv.src = 'v/' + v.f + '.mp4'; b.insertBefore(pv, shade); }
+        pv.play().then(()=>b.classList.add('previewing')).catch(()=>{});
+      });
+      b.addEventListener('pointerleave', () => { if (pv){ pv.pause(); b.classList.remove('previewing'); } });
+    }
+    wall.appendChild(b);
+  });
+
+  // lightbox
+  const lb = document.getElementById('lb'), lv = document.getElementById('lbVideo'), lc = document.getElementById('lbCap');
+  let cur = 0;
+  function show(i){
+    cur = (i + VIDEOS.length) % VIDEOS.length;
+    const v = VIDEOS[cur];
+    lv.poster = 'v/' + v.f + '.jpg';
+    lv.src = 'v/' + v.f + '.mp4';
+    lv.muted = false;
+    lv.play().catch(()=>{});
+    lc.textContent = [v.date, v.label].filter(Boolean).join(' · ') || ('סרטון ' + (cur+1) + ' מתוך ' + VIDEOS.length);
+  }
+  function openLb(i){
+    hv.pause();
+    if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open','');
+    show(i);
+  }
+  function closeLb(){
+    lv.pause(); lv.removeAttribute('src'); lv.load();
+    if (lb.open) lb.close();
+    hv.play().catch(()=>{});
+  }
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbNext').addEventListener('click', () => show(cur + 1));
+  document.getElementById('lbPrev').addEventListener('click', () => show(cur - 1));
+  lb.addEventListener('close', () => { lv.pause(); });
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-inner')) closeLb(); });
+  lv.addEventListener('ended', () => show(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (!lb.open) return;
+    if (e.key === 'ArrowLeft') show(cur + 1);
+    if (e.key === 'ArrowRight') show(cur - 1);
+  });
+})();
+</script>
+
+</body>
+</html>
