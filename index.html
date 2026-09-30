@@ -227,25 +227,25 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 
 /* tickets */
 .tickets{background:var(--velvet);border-bottom:1px solid var(--line)}
-.dates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px);margin-top:30px}
-.date-card{position:relative;display:flex;flex-direction:column;background:var(--ink);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.date-card.special{border-color:rgba(243,220,154,.55);box-shadow:0 0 0 1px rgba(243,220,154,.18),0 20px 60px -30px rgba(216,180,96,.6)}
-.date-card img{display:block;width:100%;height:auto;aspect-ratio:1600/1389;object-fit:cover;border-bottom:1px solid var(--line)}
-.date-body{display:flex;flex-direction:column;gap:12px;padding:18px 18px 20px;flex:1}
-.tag{align-self:flex-start;font-family:var(--cond);font-size:18px;letter-spacing:.06em;color:#1a1206;background:var(--gold);border-radius:3px;padding:2px 10px 0}
-.when{display:flex;align-items:baseline;gap:12px}
-.when b{font-family:var(--cond);font-weight:700;font-size:64px;line-height:.85;color:var(--gold-hi);font-variant-numeric:tabular-nums}
-.when span{font-family:var(--cond);font-size:24px;color:var(--gold);letter-spacing:.04em}
-.date-card h3{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.2;margin:0;color:var(--cream)}
-.meta{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;color:var(--muted);font-size:15px}
-.date-card .btn{margin-top:auto;justify-content:center;width:100%}
+.rows{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr) auto;align-items:center;gap:8px 28px;padding:22px 4px;border-bottom:1px solid var(--line)}
+.row.special{background:linear-gradient(90deg,rgba(216,180,96,0) 0%,rgba(216,180,96,.08) 100%)}
+.row .d{display:flex;flex-direction:column;line-height:1}
+.row .d b{font-family:var(--cond);font-weight:700;font-size:58px;color:var(--gold-hi);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.row .d span{font-family:var(--cond);font-size:22px;color:var(--gold);letter-spacing:.04em;margin-top:4px}
+.row .info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.row h3{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.2;margin:0;color:var(--cream)}
+.row .tag{align-self:flex-start;font-family:var(--cond);font-size:17px;letter-spacing:.06em;color:#1a1206;background:var(--gold);border-radius:3px;padding:2px 9px 0}
+.row .meta{margin:0;color:var(--muted);font-size:15px}
+.row .btn{white-space:nowrap;padding:14px 30px}
 .btn[aria-disabled="true"]{background:transparent;color:var(--muted);border:1px dashed var(--line);box-shadow:none;cursor:default;pointer-events:none}
-.sticky-buy{display:none}
-@media (max-width:860px){ .dates{grid-template-columns:1fr} .date-card{flex-direction:row} .date-card img{width:38%;aspect-ratio:auto;height:100%;border-bottom:0;border-inline-end:1px solid var(--line)} }
 @media (max-width:640px){
-  .when b{font-size:52px}
-  .date-card{flex-direction:column}
-  .date-card img{width:100%;height:auto;aspect-ratio:1600/1389;border-inline-end:0;border-bottom:1px solid var(--line)}
+  .row{grid-template-columns:auto minmax(0,1fr);gap:10px 16px;padding:18px 2px}
+  .row .d b{font-size:46px}
+  .row .venue{display:none}
+  .row .d span{font-size:19px}
+  .row h3{font-size:20px}
+  .row .btn{grid-column:1 / -1;width:100%;justify-content:center;padding-block:14px}
   .bar .btn-sm{padding:7px 14px;font-size:14px}
   .sticky-buy{display:flex;position:fixed;inset-inline:0;bottom:0;z-index:40;gap:10px;align-items:center;justify-content:space-between;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(10,13,19,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s ease}
   .sticky-buy.show{transform:none}
@@ -253,6 +253,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .sticky-buy .btn{padding:10px 20px;font-size:15px}
   footer{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
+.sticky-buy{display:none}
 </style>
 
 </head>
@@ -296,38 +297,33 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   <div class="wrap">
     <p class="kicker">הערבים הבאים</p>
     <h2 style="margin:0">שלושה ערבים באוקטובר</h2>
-    <div class="dates">
-      <article class="date-card special">
-        <img src="img/poster-hamelech.jpg" alt="המלך – ערב מחווה לגדול הזמר הים תיכוני, ספיישל מוצ״ש" width="900" height="781" loading="lazy">
-        <div class="date-body">
+    <ol class="rows">
+      <li class="row special">
+        <div class="d"><b dir="ltr">17.10</b><span>מוצאי שבת</span></div>
+        <div class="info">
           <span class="tag">ספיישל זוהר ארגוב</span>
-          <div class="when"><b dir="ltr">17.10</b><span>מוצאי שבת</span></div>
           <h3>המלך: ערב מחווה לגדול הזמר הים תיכוני</h3>
-          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
-          <a class="btn btn-gold buy" data-date="17.10" href="https://barby.co.il/show/5537" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+          <p class="meta">פתיחת דלתות 21:00 · מופע עמידה<span class="venue"> · בארבי נמל יפו</span></p>
         </div>
-      </article>
-      <article class="date-card">
-        <img src="img/poster.jpg" alt="שמחה גדולה הלילה – חאפלה מזרח תיכון" width="900" height="781" loading="lazy">
-        <div class="date-body">
-          <span class="tag">חאפלה מזרח תיכון</span>
-          <div class="when"><b dir="ltr">26.10</b><span>יום שני</span></div>
-          <h3>שמחה גדולה הלילה</h3>
-          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
-          <a class="btn btn-gold buy" data-date="26.10" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" href="https://barby.co.il/show/5537" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+      </li>
+      <li class="row">
+        <div class="d"><b dir="ltr">26.10</b><span>יום שני</span></div>
+        <div class="info">
+          <h3>שמחה גדולה הלילה · חאפלה מזרח תיכון</h3>
+          <p class="meta">פתיחת דלתות 21:00 · מופע עמידה<span class="venue"> · בארבי נמל יפו</span></p>
         </div>
-      </article>
-      <article class="date-card">
-        <img src="img/poster.jpg" alt="שמחה גדולה הלילה – חאפלה מזרח תיכון" width="900" height="781" loading="lazy">
-        <div class="date-body">
-          <span class="tag">חאפלה מזרח תיכון</span>
-          <div class="when"><b dir="ltr">27.10</b><span>יום שלישי</span></div>
-          <h3>שמחה גדולה הלילה</h3>
-          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
-          <a class="btn btn-gold buy" data-date="27.10" href="" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+      </li>
+      <li class="row">
+        <div class="d"><b dir="ltr">27.10</b><span>יום שלישי</span></div>
+        <div class="info">
+          <h3>שמחה גדולה הלילה · חאפלה מזרח תיכון</h3>
+          <p class="meta">פתיחת דלתות 21:00 · מופע עמידה<span class="venue"> · בארבי נמל יפו</span></p>
         </div>
-      </article>
-    </div>
+        <a class="btn btn-gold buy" href="https://barby.co.il/show/5540" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+      </li>
+    </ol>
   </div>
 </section>
 
