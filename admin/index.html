@@ -222,7 +222,7 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
 
       <div class="card c7">
         <h2>פיקסל פייסבוק</h2>
-        <p class="sub">הפיקסל נטען בכל כניסה לאתר. שינוי המספר כאן מתעדכן באתר מיד, בלי העלאה מחדש.</p>
+        <p class="sub">אותו פיקסל מוטמע גם באתר בארבי ומודד שם את הרכישות. כל לחיצה על כרטיסים מעבירה לבארבי את מזהה הקליק מהמודעה (fbclid) ואת תגי ה־UTM, כך שרכישה בבארבי משויכת למודעה שהביאה את הגולש. שינוי המספר כאן מתעדכן באתר מיד.</p>
         <form class="pixel-form" id="pixelForm">
           <div class="field"><label for="pixelId">מספר פיקסל</label><input class="input" id="pixelId" inputmode="numeric" pattern="[0-9]{6,20}" required></div>
           <button class="btn btn-gold" type="submit">שמירה</button>
@@ -233,8 +233,10 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
           <li><code>PageView</code> <span>כל כניסה לעמוד</span></li>
           <li><code>ViewContent</code> <span>הגעה לאזור הכרטיסים</span></li>
           <li><code>InitiateCheckout</code> <span>לחיצה על כרטיסים, עם תאריך ומספר הופעה</span></li>
+          <li><code>Purchase</code> <span>נמדד באתר בארבי (באותו פיקסל)</span></li>
           <li><code>Lead</code> <span>לחיצה על קבוצת הוואטסאפ</span></li>
-          <li><code>TicketClick</code> <span>אירוע מותאם: תאריך + מספר הופעה</span></li>
+          <li><code>TicketClick</code> <span>לחיצה על כרטיסים: תאריך + מספר הופעה</span></li>
+          <li><code>TicketsView</code> <span>הגעה לאזור הכרטיסים</span></li>
           <li><code>JoinWhatsApp</code> <span>אירוע מותאם: מיקום הכפתור</span></li>
           <li><code>VideoOpen</code> <span>פתיחת סרטון בנגן המלא</span></li>
           <li><code>SoundToggle</code> <span>הפעלה או השתקה של הסאונד</span></li>
