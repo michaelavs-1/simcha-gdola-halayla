@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>בק אופיס · שמחה גדולה הלילה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Karantina:wght@400;700&family=Assistant:wght@400;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --ink:#0a0d13; --panel:#111722; --panel-2:#18202d; --line:rgba(216,180,96,.2); --line-2:rgba(239,228,196,.08);
+  --gold:#d8b460; --gold-hi:#f3dc9a; --brass:#9a7634; --cream:#efe4c4; --muted:#a39c87; --faint:#6f6a5c;
+  --good:#5cc08a; --bad:#e0735f;
+  --display:"Suez One",Georgia,serif; --cond:"Karantina","Arial Narrow",sans-serif; --body:"Assistant","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{background:var(--ink);color:var(--cream);font-family:var(--body);font-size:15px;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,3vw,32px)}
+[hidden]{display:none!important}
+
+/* login */
+.login{min-height:100svh;display:grid;place-items:center;padding:24px}
+.login form{width:min(360px,100%);display:flex;flex-direction:column;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:28px}
+.login h1{font-family:var(--display);font-weight:400;font-size:28px;margin:0;color:var(--gold-hi)}
+.login p{margin:0;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;color:var(--muted)}
+.input{background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:11px 12px;direction:ltr;text-align:left}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:10px 20px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--brass));color:#1a1206}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--cream)}
+.btn-sm{padding:7px 14px;font-size:14px}
+.err{color:var(--bad);font-size:14px;min-height:1.2em;margin:0}
+
+/* top */
+.top{position:sticky;top:0;z-index:10;background:rgba(10,13,19,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding-block:12px}
+.top h1{margin:0;font-family:var(--cond);font-weight:700;font-size:28px;letter-spacing:.03em;color:var(--gold-hi);line-height:1}
+.top h1 span{color:var(--muted);font-weight:400;font-size:22px}
+.ranges{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+.ranges button{background:transparent;border:0;border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--muted);font-weight:600}
+.ranges button[aria-pressed="true"]{background:var(--gold);color:#1a1206}
+.top-actions{display:flex;gap:8px;align-items:center}
+.stamp{font-size:13px;color:var(--faint)}
+
+main{padding-block:22px 60px;display:flex;flex-direction:column;gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:14px 16px}
+.kpi .k{font-size:13px;color:var(--muted)}
+.kpi .v{font-family:var(--cond);font-weight:700;font-size:44px;line-height:1;color:var(--cream);font-variant-numeric:tabular-nums;margin-top:6px}
+.kpi .s{font-size:13px;color:var(--faint);margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi.hl{border-color:var(--line)}
+.kpi.hl .v{color:var(--gold-hi)}
+
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:16px 18px;min-width:0}
+.card h2{font-size:15px;font-weight:700;margin:0 0 2px;color:var(--cream)}
+.card .sub{font-size:13px;color:var(--faint);margin:0 0 14px}
+.c6{grid-column:span 6}.c4{grid-column:span 4}.c8{grid-column:span 8}.c12{grid-column:span 12}.c5{grid-column:span 5}.c7{grid-column:span 7}
+
+/* bar chart */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:200px;overflow:visible}
+.chart .tip{position:absolute;pointer-events:none;background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-size:13px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .1s}
+.chart .tip b{font-variant-numeric:tabular-nums}
+.empty{color:var(--faint);font-size:14px;padding:18px 0}
+
+/* bar list */
+.bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.bars li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.bars .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bars .num{font-variant-numeric:tabular-nums;color:var(--cream);font-weight:600}
+.bars .num small{color:var(--faint);font-weight:400;margin-inline-start:6px}
+.bars .track{grid-column:1/-1;height:6px;background:var(--line-2);border-radius:3px;overflow:hidden}
+.bars .fill{height:100%;background:var(--gold);border-radius:3px}
+
+/* show rows */
+.shows{display:flex;flex-direction:column;gap:10px}
+.show{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:4px 14px;align-items:center}
+.show .d{font-family:var(--cond);font-weight:700;font-size:32px;color:var(--gold-hi);line-height:1;font-variant-numeric:tabular-nums}
+.show .t{font-size:14px;color:var(--muted)}
+.show .num{font-variant-numeric:tabular-nums;font-weight:700;font-size:18px}
+.show .num small{display:block;font-weight:400;font-size:12px;color:var(--faint);text-align:left}
+.show .track{grid-column:2/-1;height:8px;background:var(--line-2);border-radius:4px;overflow:hidden}
+.show .fill{height:100%;background:var(--gold);border-radius:4px}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-weight:600;color:var(--muted);text-align:start;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:tabular-nums}
+.scroll-x{overflow-x:auto}
+.feed td:first-child{color:var(--faint);white-space:nowrap}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--gold-hi)}
+
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px}
+.vid{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);border:1px solid var(--line-2)}
+.vid img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;opacity:.85}
+.vid span{position:absolute;inset-inline:6px;bottom:6px;font-family:var(--cond);font-size:22px;font-weight:700;color:var(--gold-hi);text-shadow:0 1px 6px #000;font-variant-numeric:tabular-nums}
+.vid em{position:absolute;top:6px;inset-inline-start:6px;font-style:normal;font-size:11px;background:rgba(10,13,19,.8);border-radius:4px;padding:0 5px;color:var(--muted)}
+
+.funnel{display:flex;flex-direction:column;gap:10px}
+.funnel .row{display:grid;grid-template-columns:52px minmax(0,1fr) 70px;gap:12px;align-items:center}
+.funnel .lbl{font-family:var(--cond);font-size:22px;color:var(--gold)}
+.funnel .bar{height:14px;background:var(--line-2);border-radius:4px;overflow:hidden}
+.funnel .bar i{display:block;height:100%;background:var(--gold);border-radius:4px}
+.funnel .val{text-align:left;font-variant-numeric:tabular-nums}
+
+.pixel-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.pixel-form .field{flex:1 1 220px}
+.ok{color:var(--good);font-size:14px;margin:8px 0 0;min-height:1.2em}
+.events-list{columns:2 220px;column-gap:24px;margin:14px 0 0;padding:0;list-style:none;font-size:14px}
+.events-list li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--line-2)}
+.events-list code{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--gold-hi);direction:ltr;display:inline-block}
+.events-list span{color:var(--muted)}
+.utm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.utm-out{margin-top:10px;display:flex;gap:8px;align-items:center}
+.utm-out .input{flex:1;min-width:0;font-size:13px}
+
+@media (max-width:1100px){ .kpis{grid-template-columns:repeat(3,minmax(0,1fr))} .c4,.c5,.c7,.c8{grid-column:span 6} }
+@media (max-width:760px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .c4,.c5,.c6,.c7,.c8,.c12{grid-column:span 12}
+  .kpi .v{font-size:38px}
+  .utm{grid-template-columns:1fr}
+  .top h1 span{display:none}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<section class="login" id="login">
+  <form id="loginForm" autocomplete="off">
+    <h1>בק אופיס</h1>
+    <p>שמחה גדולה הלילה · barby-hafla.com</p>
+    <div class="field">
+      <label for="pass">סיסמה</label>
+      <input class="input" id="pass" type="password" inputmode="numeric" autocomplete="current-password" required>
+    </div>
+    <button class="btn btn-gold" type="submit" id="loginBtn">כניסה</button>
+    <p class="err" id="loginErr" role="alert"></p>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <h1>שמחה גדולה הלילה <span>· בק אופיס</span></h1>
+      <div class="ranges" role="group" aria-label="טווח תאריכים">
+        <button type="button" data-range="today">היום</button>
+        <button type="button" data-range="7" aria-pressed="true">7 ימים</button>
+        <button type="button" data-range="30">30 ימים</button>
+        <button type="button" data-range="all">הכל</button>
+      </div>
+      <div class="top-actions">
+        <span class="stamp" id="stamp"></span>
+        <button class="btn btn-ghost btn-sm" type="button" id="refresh">רענון</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="csv">ייצוא CSV</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="logout">יציאה</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="kpis" aria-label="מדדים עיקריים">
+      <div class="kpi"><div class="k">מבקרים ייחודיים</div><div class="v" id="k_visitors">–</div><div class="s" id="k_sessions"></div></div>
+      <div class="kpi"><div class="k">צפיות בעמוד</div><div class="v" id="k_pageviews">–</div><div class="s">כולל כניסות חוזרות</div></div>
+      <div class="kpi hl"><div class="k">לחיצות על כרטיסים</div><div class="v" id="k_tickets">–</div><div class="s" id="k_tickets_s"></div></div>
+      <div class="kpi hl"><div class="k">אחוז מבקרים שלחצו לכרטיסים</div><div class="v" id="k_ctr">–</div><div class="s" id="k_ctr_s"></div></div>
+      <div class="kpi"><div class="k">הצטרפות לוואטסאפ</div><div class="v" id="k_wa">–</div><div class="s">לחיצות על הקישור</div></div>
+      <div class="kpi"><div class="k">זמן צפייה ממוצע</div><div class="v" id="k_time">–</div><div class="s" id="k_videos"></div></div>
+    </section>
+
+    <section class="grid">
+      <div class="card c6"><h2>מבקרים ייחודיים ביום</h2><p class="sub">שעון ישראל</p><div class="chart" id="chVisitors"></div></div>
+      <div class="card c6"><h2>לחיצות על כרטיסים ביום</h2><p class="sub">מעבר לעמוד הרכישה בבארבי</p><div class="chart" id="chTickets"></div></div>
+
+      <div class="card c5"><h2>לחיצות לפי הופעה</h2><p class="sub">לחיצות · אנשים שונים</p><div class="shows" id="shows"></div></div>
+      <div class="card c7"><h2>מקורות תנועה</h2><p class="sub">utm_source, ואם אין אז האתר שהפנה</p>
+        <div class="scroll-x"><table><thead><tr><th>מקור</th><th>מבקרים</th><th>לחצו לכרטיסים</th><th>המרה</th></tr></thead><tbody id="sources"></tbody></table></div>
+      </div>
+
+      <div class="card c4"><h2>מכשירים</h2><p class="sub">מבקרים ייחודיים</p><ul class="bars" id="devices"></ul></div>
+      <div class="card c4"><h2>עומק גלילה</h2><p class="sub">אחוז מהביקורים שהגיעו לכל נקודה</p><div class="funnel" id="scroll"></div></div>
+      <div class="card c4"><h2>אזורים שנצפו</h2><p class="sub">ביקורים שראו כל אזור בעמוד</p><ul class="bars" id="sections"></ul>
+        <p class="sub" style="margin:14px 0 0" id="sound"></p></div>
+
+      <div class="card c8"><h2>סרטונים שנפתחו</h2><p class="sub">מספר הפתיחות של כל סרטון בנגן המלא</p><div class="vids" id="videos"></div></div>
+      <div class="card c4"><h2>קמפיינים</h2><p class="sub">utm_campaign</p><ul class="bars" id="campaigns"></ul></div>
+
+      <div class="card c12"><h2>פעילות אחרונה</h2><p class="sub">60 האירועים האחרונים בטווח</p>
+        <div class="scroll-x"><table class="feed"><thead><tr><th>זמן</th><th>אירוע</th><th>פרט</th><th>מכשיר</th><th>מקור</th><th>מבקר</th></tr></thead><tbody id="feed"></tbody></table></div>
+      </div>
+
+      <div class="card c7">
+        <h2>פיקסל פייסבוק</h2>
+        <p class="sub">הפיקסל נטען בכל כניסה לאתר. שינוי המספר כאן מתעדכן באתר מיד, בלי העלאה מחדש.</p>
+        <form class="pixel-form" id="pixelForm">
+          <div class="field"><label for="pixelId">מספר פיקסל</label><input class="input" id="pixelId" inputmode="numeric" pattern="[0-9]{6,20}" required></div>
+          <button class="btn btn-gold" type="submit">שמירה</button>
+          <a class="btn btn-ghost" id="evLink" target="_blank" rel="noopener" href="#">Events Manager</a>
+        </form>
+        <p class="ok" id="pixelMsg" role="status"></p>
+        <ul class="events-list">
+          <li><code>PageView</code> <span>כל כניסה לעמוד</span></li>
+          <li><code>ViewContent</code> <span>הגעה לאזור הכרטיסים</span></li>
+          <li><code>InitiateCheckout</code> <span>לחיצה על כרטיסים, עם תאריך ומספר הופעה</span></li>
+          <li><code>Lead</code> <span>לחיצה על קבוצת הוואטסאפ</span></li>
+          <li><code>TicketClick</code> <span>אירוע מותאם: תאריך + מספר הופעה</span></li>
+          <li><code>JoinWhatsApp</code> <span>אירוע מותאם: מיקום הכפתור</span></li>
+          <li><code>VideoOpen</code> <span>פתיחת סרטון בנגן המלא</span></li>
+          <li><code>SoundToggle</code> <span>הפעלה או השתקה של הסאונד</span></li>
+          <li><code>ScrollDepth</code> <span>25%, 50%, 75%, 100%</span></li>
+          <li><code>SectionView</code> <span>צפייה בכל אזור בעמוד</span></li>
+          <li><code>CTAClick</code> <span>כפתורי "לכרטיסים" בעמוד</span></li>
+          <li><code>Engaged60s</code> <span>דקה של צפייה פעילה</span></li>
+        </ul>
+      </div>
+      <div class="card c5">
+        <h2>בונה לינקים לקמפיין</h2>
+        <p class="sub">לינק עם תגי UTM, כדי שכל קמפיין יופיע בנפרד במקורות</p>
+        <div class="utm">
+          <div class="field"><label for="uSrc">מקור</label><input class="input" id="uSrc" placeholder="facebook"></div>
+          <div class="field"><label for="uMed">סוג</label><input class="input" id="uMed" placeholder="paid"></div>
+          <div class="field"><label for="uCmp">קמפיין</label><input class="input" id="uCmp" placeholder="hamelech_1710"></div>
+        </div>
+        <div class="utm-out"><input class="input" id="uOut" readonly aria-label="הלינק המוכן"><button class="btn btn-gold btn-sm" type="button" id="uCopy">העתקה</button></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  const SB = 'https://lfgqvowyryozwnudbrxm.supabase.co', KEY = 'sb_publishable_MkXm84JBOaIcD5rqdX6mXQ_vQOhlBdm';
+  const SITE = 'https://barby-hafla.com/';
+  const SHOW_NAMES = { '17.10': 'המלך · ספיישל זוהר ארגוב', '26.10': 'חאפלה מזרח תיכון', '27.10': 'חאפלה מזרח תיכון' };
+  const TYPE_NAMES = { pageview: 'כניסה', ticket_click: 'לחיצה על כרטיסים', whatsapp_click: 'וואטסאפ', video_open: 'פתיחת סרטון', sound: 'סאונד', scroll: 'גלילה', section_view: 'צפייה באזור', engaged: 'זמן צפייה', cta: 'כפתור', test: 'בדיקה' };
+  const SECTION_NAMES = { tickets: 'הכרטיסים', about: 'מה קורה בערב', videos: 'הסרטונים', history: 'היסטוריה', final: 'סוף העמוד' };
+  const $ = id => document.getElementById(id);
+  const fmt = n => (n == null ? '–' : Number(n).toLocaleString('he-IL'));
+  let pass = null, range = '7', last = null;
+  try { pass = sessionStorage.getItem('hf_admin') || null; } catch(e){}
+
+  async function rpc(fn, body){
+    const r = await fetch(SB + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+    const j = await r.json().catch(() => null);
+    if (!r.ok) { const e = new Error((j && j.message) || ('HTTP ' + r.status)); e.status = r.status; throw e; }
+    return j;
+  }
+  function span(){
+    const now = new Date(), to = new Date(now.getTime() + 60000);
+    let from;
+    if (range === 'today') { from = new Date(now); from.setHours(0,0,0,0); }
+    else if (range === 'all') from = new Date('2026-09-01T00:00:00+03:00');
+    else { from = new Date(now); from.setHours(0,0,0,0); from.setDate(from.getDate() - (Number(range) - 1)); }
+    return { from, to };
+  }
+
+  // login
+  $('loginForm').addEventListener('submit', async e => {
+    e.preventDefault(); $('loginErr').textContent = ''; $('loginBtn').disabled = true;
+    try {
+      const ok = await rpc('hafla_login', { pass: $('pass').value });
+      if (!ok) { $('loginErr').textContent = 'הסיסמה לא נכונה'; return; }
+      pass = $('pass').value; try { sessionStorage.setItem('hf_admin', pass); } catch(e){}
+      enter();
+    } catch(err) { $('loginErr').textContent = 'אין חיבור לשרת. נסו שוב.'; }
+    finally { $('loginBtn').disabled = false; }
+  });
+  $('logout').addEventListener('click', () => { pass = null; try { sessionStorage.removeItem('hf_admin'); } catch(e){} $('app').hidden = true; $('login').hidden = false; $('pass').value = ''; });
+  document.querySelectorAll('.ranges button').forEach(b => b.addEventListener('click', () => {
+    range = b.dataset.range; document.querySelectorAll('.ranges button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); load();
+  }));
+  $('refresh').addEventListener('click', load);
+
+  function enter(){ $('login').hidden = true; $('app').hidden = false; load(); loadPixel(); }
+
+  async function load(){
+    const { from, to } = span();
+    $('stamp').textContent = 'טוען…';
+    try {
+      const d = await rpc('hafla_stats', { pass, d_from: from.toISOString(), d_to: to.toISOString() });
+      last = d; render(d, from, to);
+      $('stamp').textContent = 'עודכן ' + new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+    } catch(err) {
+      if (/unauthorized/.test(err.message)) { $('logout').click(); $('loginErr').textContent = 'צריך להתחבר מחדש'; }
+      else $('stamp').textContent = 'שגיאה בטעינה';
+    }
+  }
+
+  function days(from, to){
+    const out = [], d = new Date(from); d.setHours(0,0,0,0);
+    while (d < to) { out.push(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')); d.setDate(d.getDate() + 1); }
+    return out;
+  }
+  function barChart(el, series, key, unit){
+    el.innerHTML = '';
+    const max = Math.max(1, ...series.map(s => s[key]));
+    if (!series.some(s => s[key] > 0)) { el.innerHTML = '<div class="empty">אין עדיין נתונים בטווח הזה</div>'; return; }
+    const W = 600, H = 200, padB = 22, padT = 8, n = series.length, gap = 2, bw = Math.max(2, (W - gap * (n - 1)) / n);
+    const nice = (() => { const p = Math.pow(10, Math.floor(Math.log10(max))); const m = max / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p; })();
+    const y = v => padT + (H - padB - padT) * (1 - v / nice);
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="' + unit + '">';
+    [0, .5, 1].forEach(f => { const yy = y(nice * f); svg += '<line x1="0" x2="' + W + '" y1="' + yy + '" y2="' + yy + '" stroke="rgba(239,228,196,.08)" stroke-width="1" vector-effect="non-scaling-stroke"/>'; });
+    series.forEach((s, i) => {
+      const x = W - (i + 1) * bw - i * gap; // RTL: first day on the right
+      const v = s[key], top = y(v), h = Math.max(0, H - padB - top);
+      if (v > 0) svg += '<path d="M' + x + ',' + (H - padB) + 'V' + (top + Math.min(4, h)) + 'q0,-4 4,-4h' + Math.max(0, bw - 8) + 'q4,0 4,4V' + (H - padB) + 'Z" fill="#d8b460"/>';
+      svg += '<rect class="hit" data-i="' + i + '" x="' + x + '" y="0" width="' + (bw + gap) + '" height="' + H + '" fill="transparent"/>';
+    });
+    svg += '</svg>';
+    el.innerHTML = svg + '<div class="tip"></div>';
+    const ax = document.createElement('div'); ax.style.cssText = 'display:flex;justify-content:space-between;font-size:12px;color:var(--faint);margin-top:4px;font-variant-numeric:tabular-nums';
+    const lab = s => s.day.slice(8) + '.' + s.day.slice(5, 7);
+    ax.innerHTML = '<span>' + lab(series[0]) + '</span><span>' + fmt(nice) + ' מקס׳</span><span>' + lab(series[n - 1]) + '</span>';
+    el.appendChild(ax);
+    const tip = el.querySelector('.tip'), svgEl = el.querySelector('svg');
+    el.querySelectorAll('.hit').forEach(r => {
+      const show = () => { const s = series[+r.dataset.i]; const rb = r.getBoundingClientRect(), eb = el.getBoundingClientRect();
+        tip.innerHTML = lab(s) + ' · <b>' + fmt(s[key]) + '</b> ' + unit; tip.style.left = (rb.left - eb.left + rb.width / 2) + 'px'; tip.style.top = (svgEl.getBoundingClientRect().top - eb.top + y(s[key]) * svgEl.clientHeight / H) + 'px'; tip.style.opacity = 1; };
+      r.addEventListener('mouseenter', show); r.addEventListener('touchstart', show, { passive: true });
+      r.addEventListener('mouseleave', () => tip.style.opacity = 0);
+    });
+  }
+  function bars(el, rows, nameKey, valKey, nameFn, extraFn){
+    if (!rows.length) { el.innerHTML = '<li class="empty">אין עדיין נתונים</li>'; return; }
+    const max = Math.max(1, ...rows.map(r => r[valKey]));
+    el.innerHTML = rows.map(r => '<li><span class="n"></span><span class="num">' + fmt(r[valKey]) + (extraFn ? '<small> · ' + extraFn(r) + '</small>' : '') + '</span><span class="track"><span class="fill" style="width:' + (r[valKey] / max * 100) + '%"></span></span></li>').join('');
+    el.querySelectorAll('.n').forEach((n, i) => n.textContent = nameFn ? nameFn(rows[i][nameKey]) : (rows[i][nameKey] || '—'));
+  }
+
+  function render(d, from, to){
+    $('k_visitors').textContent = fmt(d.visitors);
+    $('k_sessions').textContent = fmt(d.sessions) + ' ביקורים';
+    $('k_pageviews').textContent = fmt(d.pageviews);
+    $('k_tickets').textContent = fmt(d.ticket_clicks);
+    $('k_tickets_s').textContent = fmt(d.ticket_visitors) + ' אנשים שונים';
+    const ctr = d.visitors ? (d.ticket_visitors / d.visitors * 100) : 0;
+    $('k_ctr').textContent = d.visitors ? ctr.toFixed(1) + '%' : '–';
+    $('k_ctr_s').textContent = 'מתוך ' + fmt(d.visitors) + ' מבקרים';
+    $('k_wa').textContent = fmt(d.whatsapp_clicks);
+    const t = d.avg_engaged_sec; $('k_time').textContent = t ? (t >= 60 ? Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0') : t + 'ש׳') : '–';
+    $('k_videos').textContent = fmt(d.video_opens) + ' פתיחות סרטון';
+
+    const map = {}; (d.daily || []).forEach(r => map[r.day] = r);
+    const series = days(from, to).map(day => Object.assign({ day, visitors: 0, ticket_clicks: 0 }, map[day] || {}));
+    barChart($('chVisitors'), series, 'visitors', 'מבקרים');
+    barChart($('chTickets'), series, 'ticket_clicks', 'לחיצות');
+
+    const shows = ['17.10', '26.10', '27.10'].map(s => Object.assign({ show: s, clicks: 0, people: 0 }, (d.tickets_by_show || []).find(x => x.show === s) || {}));
+    (d.tickets_by_show || []).forEach(x => { if (!shows.find(s => s.show === x.show)) shows.push(x); });
+    const smax = Math.max(1, ...shows.map(s => s.clicks));
+    $('shows').innerHTML = shows.map(s => '<div class="show"><span class="d">' + s.show + '</span><span class="t">' + (SHOW_NAMES[s.show] || '') + '</span><span class="num">' + fmt(s.clicks) + '<small>' + fmt(s.people) + ' אנשים</small></span><span class="track"><span class="fill" style="width:' + (s.clicks / smax * 100) + '%"></span></span></div>').join('');
+
+    const src = d.sources || [];
+    $('sources').innerHTML = src.length ? src.map(s => '<tr><td class="sn"></td><td>' + fmt(s.visitors) + '</td><td>' + fmt(s.buyers_clicked) + '</td><td>' + (s.visitors ? (s.buyers_clicked / s.visitors * 100).toFixed(0) + '%' : '–') + '</td></tr>').join('') : '<tr><td colspan="4" class="empty">אין עדיין נתונים</td></tr>';
+    $('sources').querySelectorAll('.sn').forEach((td, i) => td.textContent = src[i].source);
+
+    const devName = { mobile: 'טלפון', desktop: 'מחשב', tablet: 'טאבלט' };
+    const totDev = (d.devices || []).reduce((a, b) => a + b.visitors, 0) || 1;
+    bars($('devices'), d.devices || [], 'device', 'visitors', n => devName[n] || n, r => Math.round(r.visitors / totDev * 100) + '%');
+
+    const sess = Math.max(1, d.sessions);
+    const sc = [25, 50, 75, 100].map(p => ({ p, n: ((d.scroll || []).find(x => x.pct === p) || {}).sessions || 0 }));
+    $('scroll').innerHTML = sc.map(r => '<div class="row"><span class="lbl">' + r.p + '%</span><span class="bar"><i style="width:' + Math.min(100, r.n / sess * 100) + '%"></i></span><span class="val">' + Math.round(r.n / sess * 100) + '% · ' + fmt(r.n) + '</span></div>').join('');
+
+    bars($('sections'), d.sections || [], 'section', 'sessions', n => SECTION_NAMES[n] || n);
+    $('sound').textContent = 'סאונד בפתיחה: ' + fmt(d.sound.on) + ' הפעלות · ' + fmt(d.sound.off) + ' השתקות';
+
+    const vids = d.videos || [];
+    $('videos').innerHTML = vids.length ? vids.map((v, i) => '<div class="vid"><img loading="lazy" alt="" src="/v/' + encodeURIComponent(v.video) + '.jpg"><em>#' + (i + 1) + '</em><span>' + fmt(v.opens) + '</span></div>').join('') : '<div class="empty">עדיין לא נפתחו סרטונים בטווח הזה</div>';
+
+    bars($('campaigns'), d.campaigns || [], 'campaign', 'visitors');
+
+    const feed = d.recent || [];
+    $('feed').innerHTML = feed.length ? feed.map(() => '<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>').join('') : '<tr><td colspan="6" class="empty">אין פעילות בטווח הזה</td></tr>';
+    $('feed').querySelectorAll('tr').forEach((tr, i) => { const e = feed[i]; if (!e) return; const c = tr.children;
+      c[0].textContent = new Date(e.ts).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+      c[1].innerHTML = '<span class="pill"></span>'; c[1].firstChild.textContent = TYPE_NAMES[e.type] || e.type;
+      c[2].textContent = (e.type === 'section_view' ? (SECTION_NAMES[e.label] || e.label) : (e.label || '')).slice(0, 60);
+      c[3].textContent = devName[e.device] || e.device || ''; c[4].textContent = (e.src || 'ישיר').replace(/^https?:\/\//, '').slice(0, 40); c[5].textContent = e.vid || ''; });
+  }
+
+  // CSV
+  $('csv').addEventListener('click', async () => {
+    const { from, to } = span();
+    try {
+      const rows = await rpc('hafla_export', { pass, d_from: from.toISOString(), d_to: to.toISOString() });
+      const cols = ['ts', 'type', 'label', 'value', 'device', 'utm_source', 'utm_medium', 'utm_campaign', 'ref', 'vid', 'sid', 'lang', 'path'];
+      const esc = v => v == null ? '' : '"' + String(v).replace(/"/g, '""') + '"';
+      const csv = '﻿' + cols.join(',') + '\n' + rows.map(r => cols.map(c => esc(r[c])).join(',')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      a.download = 'barby-hafla-events-' + range + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    } catch(e) { $('stamp').textContent = 'הייצוא נכשל'; }
+  });
+
+  // pixel
+  async function loadPixel(){
+    try { const c = await rpc('hafla_config'); $('pixelId').value = c.pixel_id || ''; setEv(c.pixel_id); } catch(e){}
+  }
+  function setEv(id){ $('evLink').href = 'https://business.facebook.com/events_manager2/list/pixel/' + encodeURIComponent(id || '') + '/overview'; }
+  $('pixelForm').addEventListener('submit', async e => {
+    e.preventDefault(); $('pixelMsg').textContent = '';
+    try { const c = await rpc('hafla_set_pixel', { pass, pixel: $('pixelId').value.trim() }); setEv(c.pixel_id); $('pixelMsg').style.color = ''; $('pixelMsg').textContent = 'נשמר. מהכניסה הבאה האתר שולח לפיקסל ' + c.pixel_id; }
+    catch(err) { $('pixelMsg').style.color = 'var(--bad)'; $('pixelMsg').textContent = /invalid/.test(err.message) ? 'מספר פיקסל צריך להיות ספרות בלבד' : 'השמירה נכשלה'; }
+  });
+
+  // UTM builder
+  function buildUtm(){
+    const p = new URLSearchParams();
+    const s = $('uSrc').value.trim(), m = $('uMed').value.trim(), c = $('uCmp').value.trim();
+    if (s) p.set('utm_source', s); if (m) p.set('utm_medium', m); if (c) p.set('utm_campaign', c);
+    $('uOut').value = SITE + (p.toString() ? '?' + p.toString() : '');
+  }
+  ['uSrc', 'uMed', 'uCmp'].forEach(id => $(id).addEventListener('input', buildUtm)); buildUtm();
+  $('uCopy').addEventListener('click', () => {
+    const v = $('uOut').value;
+    (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(() => { $('uCopy').textContent = 'הועתק'; setTimeout(() => $('uCopy').textContent = 'העתקה', 1500); })
+      .catch(() => { $('uOut').select(); });
+  });
+
+  if (pass) rpc('hafla_login', { pass }).then(ok => ok ? enter() : null).catch(() => {});
+})();
+</script>
+</body>
+</html>
