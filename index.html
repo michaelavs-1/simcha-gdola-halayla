@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="שמחה גדולה הלילה · בארבי וחתול בשק">
-<meta property="og:description" content="חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק.">
+<meta property="og:description" content="חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק. 17.10 ספיישל זוהר ארגוב, 26.10, 27.10 בבארבי נמל יפו.">
 <meta property="og:image" content="https://barby-hafla.com/img/poster.jpg">
 <meta property="og:url" content="https://barby-hafla.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0a0d13">
 <title>שמחה גדולה הלילה</title>
-<meta name="description" content="שמחה גדולה הלילה — חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק.">
+<meta name="description" content="שמחה גדולה הלילה — חאפלה מזרח תיכון, הפקת מקור של בארבי וחתול בשק. 17.10 ספיישל זוהר ארגוב, 26.10, 27.10 בבארבי נמל יפו.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Karantina:wght@400;700&family=Assistant:wght@400;600;700&display=swap">
@@ -75,6 +75,7 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,9.4vw,132px);
   -webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 2.6s ease-out .3s both}
 @keyframes glint{from{background-position:100% 0}to{background-position:0% 0}}
 .hero .sub{font-family:var(--display);font-size:clamp(20px,2.6vw,32px);color:var(--cream);margin:10px 0 18px}
+.hero-dates{font-family:var(--cond);font-size:clamp(22px,2.4vw,30px);letter-spacing:.05em;color:var(--gold-hi);margin:0 0 18px;font-variant-numeric:tabular-nums}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .sound{position:absolute;z-index:3;top:16px;inset-inline-start:16px;background:rgba(10,13,19,.6);border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:8px 14px;font:600 14px var(--body);cursor:pointer;display:flex;gap:8px;align-items:center}
 .sound svg{width:18px;height:18px}
@@ -223,6 +224,35 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   h1{animation:none;background-position:30% 0}
   .btn{transition:none}
 }
+
+/* tickets */
+.tickets{background:var(--velvet);border-bottom:1px solid var(--line)}
+.dates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px);margin-top:30px}
+.date-card{position:relative;display:flex;flex-direction:column;background:var(--ink);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.date-card.special{border-color:rgba(243,220,154,.55);box-shadow:0 0 0 1px rgba(243,220,154,.18),0 20px 60px -30px rgba(216,180,96,.6)}
+.date-card img{display:block;width:100%;height:auto;aspect-ratio:1600/1389;object-fit:cover;border-bottom:1px solid var(--line)}
+.date-body{display:flex;flex-direction:column;gap:12px;padding:18px 18px 20px;flex:1}
+.tag{align-self:flex-start;font-family:var(--cond);font-size:18px;letter-spacing:.06em;color:#1a1206;background:var(--gold);border-radius:3px;padding:2px 10px 0}
+.when{display:flex;align-items:baseline;gap:12px}
+.when b{font-family:var(--cond);font-weight:700;font-size:64px;line-height:.85;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.when span{font-family:var(--cond);font-size:24px;color:var(--gold);letter-spacing:.04em}
+.date-card h3{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.2;margin:0;color:var(--cream)}
+.meta{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;color:var(--muted);font-size:15px}
+.date-card .btn{margin-top:auto;justify-content:center;width:100%}
+.btn[aria-disabled="true"]{background:transparent;color:var(--muted);border:1px dashed var(--line);box-shadow:none;cursor:default;pointer-events:none}
+.sticky-buy{display:none}
+@media (max-width:860px){ .dates{grid-template-columns:1fr} .date-card{flex-direction:row} .date-card img{width:38%;aspect-ratio:auto;height:100%;border-bottom:0;border-inline-end:1px solid var(--line)} }
+@media (max-width:640px){
+  .when b{font-size:52px}
+  .date-card{flex-direction:column}
+  .date-card img{width:100%;height:auto;aspect-ratio:1600/1389;border-inline-end:0;border-bottom:1px solid var(--line)}
+  .bar .btn-sm{padding:7px 14px;font-size:14px}
+  .sticky-buy{display:flex;position:fixed;inset-inline:0;bottom:0;z-index:40;gap:10px;align-items:center;justify-content:space-between;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(10,13,19,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s ease}
+  .sticky-buy.show{transform:none}
+  .sticky-buy span{font-family:var(--cond);font-size:20px;color:var(--gold-hi);letter-spacing:.03em}
+  .sticky-buy .btn{padding:10px 20px;font-size:15px}
+  footer{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
 </style>
 
 </head>
@@ -236,6 +266,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       <img src="img/logo-hatul-basak.png" alt="חתול בשק" class="lg-hatul" width="560" height="255">
       <img src="img/logo-algorithm.png" alt="אלגוריתם הפקות" class="lg-algo" width="431" height="520">
     </div>
+    <a class="btn btn-gold btn-sm" href="#tickets">לכרטיסים</a>
   </div>
 </header>
 
@@ -251,13 +282,54 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       <p class="eyebrow">הפקת מקור של בארבי וחתול בשק</p>
       <h1>שמחה גדולה הלילה</h1>
       <p class="sub">חאפלה מזרח תיכון</p>
+      <p class="hero-dates">17.10 · 26.10 · 27.10 · בארבי נמל יפו</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="#videos">לצפייה בסרטונים</a>
+        <a class="btn btn-gold" href="#tickets">לכרטיסים</a>
+        <a class="btn btn-ghost" href="#videos">לצפייה בסרטונים</a>
       </div>
     </div>
   </div>
 </div>
 <div class="fringe" aria-hidden="true"></div>
+
+<section class="tickets" id="tickets">
+  <div class="wrap">
+    <p class="kicker">הערבים הבאים</p>
+    <h2 style="margin:0">שלושה ערבים באוקטובר</h2>
+    <div class="dates">
+      <article class="date-card special">
+        <img src="img/poster-hamelech.jpg" alt="המלך – ערב מחווה לגדול הזמר הים תיכוני, ספיישל מוצ״ש" width="900" height="781" loading="lazy">
+        <div class="date-body">
+          <span class="tag">ספיישל זוהר ארגוב</span>
+          <div class="when"><b dir="ltr">17.10</b><span>מוצאי שבת</span></div>
+          <h3>המלך: ערב מחווה לגדול הזמר הים תיכוני</h3>
+          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
+          <a class="btn btn-gold buy" data-date="17.10" href="https://barby.co.il/show/5537" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        </div>
+      </article>
+      <article class="date-card">
+        <img src="img/poster.jpg" alt="שמחה גדולה הלילה – חאפלה מזרח תיכון" width="900" height="781" loading="lazy">
+        <div class="date-body">
+          <span class="tag">חאפלה מזרח תיכון</span>
+          <div class="when"><b dir="ltr">26.10</b><span>יום שני</span></div>
+          <h3>שמחה גדולה הלילה</h3>
+          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
+          <a class="btn btn-gold buy" data-date="26.10" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        </div>
+      </article>
+      <article class="date-card">
+        <img src="img/poster.jpg" alt="שמחה גדולה הלילה – חאפלה מזרח תיכון" width="900" height="781" loading="lazy">
+        <div class="date-body">
+          <span class="tag">חאפלה מזרח תיכון</span>
+          <div class="when"><b dir="ltr">27.10</b><span>יום שלישי</span></div>
+          <h3>שמחה גדולה הלילה</h3>
+          <ul class="meta"><li>פתיחת דלתות 21:00</li><li>מופע עמידה · בארבי נמל יפו</li></ul>
+          <a class="btn btn-gold buy" data-date="27.10" href="" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section id="about">
   <div class="wrap">
@@ -304,13 +376,16 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   </div>
 </section>
 
+<div class="sticky-buy" id="stickyBuy" aria-hidden="true"><span>17.10 · 26.10 · 27.10</span><a class="btn btn-gold" href="#tickets" tabindex="-1">לכרטיסים</a></div>
+
 <section class="final">
   <div class="wrap">
     <img class="poster" src="img/poster.jpg" alt="פוסטר שמחה גדולה הלילה – חאפלה מזרח תיכון, בארבי" width="900" height="781" loading="lazy">
     <div>
       <p class="kicker">בארבי · נמל יפו</p>
       <h2>נתראה בחאפלה</h2>
-      <p class="lead">הפקת מקור של בארבי וחתול בשק.</p>
+      <p class="lead">הפקת מקור של בארבי וחתול בשק. 17.10, 26.10 ו־27.10 בבארבי נמל יפו.</p>
+      <div style="margin-top:22px"><a class="btn btn-gold" href="#tickets">לבחירת תאריך וכרטיסים</a></div>
       <div class="logos logos-lg">
         <img src="img/logo-barby.png" alt="בארבי" class="lg-barby" width="359" height="131" loading="lazy">
         <img src="img/logo-hatul-basak.png" alt="חתול בשק" class="lg-hatul" width="560" height="255" loading="lazy">
@@ -384,6 +459,20 @@ const VIDEOS = [{"f": "hero_tall", "w": 540, "h": 960, "date": "", "label": ""},
       paint();
     }), {threshold: 0.25}).observe(hv);
   }
+
+
+  // tickets: sticky bar on phones, hidden while the date cards are on screen
+  const sticky = document.getElementById('stickyBuy');
+  const tix = document.getElementById('tickets');
+  if (sticky && 'IntersectionObserver' in window){
+    let heroOn = true, tixOn = false;
+    const upd = () => { const on = !heroOn && !tixOn; sticky.classList.toggle('show', on); sticky.setAttribute('aria-hidden', String(!on)); sticky.querySelector('a').tabIndex = on ? 0 : -1; };
+    new IntersectionObserver(es => { heroOn = es[0].isIntersecting; upd(); }, {threshold: 0.1}).observe(document.getElementById('top'));
+    new IntersectionObserver(es => { tixOn = es[0].isIntersecting; upd(); }, {threshold: 0.05}).observe(tix);
+  }
+  document.querySelectorAll('a.buy').forEach(a => {
+    if (!/^https?:/.test(a.getAttribute('href'))) { a.textContent = 'הכרטיסים נפתחים בקרוב'; a.setAttribute('aria-disabled','true'); a.removeAttribute('href'); }
+  });
 
   // video wall
   const wall = document.getElementById('wall');
