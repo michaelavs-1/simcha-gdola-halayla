@@ -120,6 +120,26 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
 .utm-out{margin-top:10px;display:flex;gap:8px;align-items:center}
 .utm-out .input{flex:1;min-width:0;font-size:13px}
 
+
+.tabs{display:flex;gap:6px;padding-block:0 0;border-top:1px solid var(--line-2)}
+.tabs button{background:transparent;border:0;border-bottom:2px solid transparent;padding:10px 14px;cursor:pointer;color:var(--muted);font-weight:700}
+.tabs button[aria-selected="true"]{color:var(--gold-hi);border-bottom-color:var(--gold)}
+.lib-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.lib-head .sub{margin:0}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.clip{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line-2);border-radius:8px;overflow:hidden}
+.clip .media{position:relative;background:#000;aspect-ratio:9/16}
+.clip .media.land{aspect-ratio:16/9}
+.clip .media.sq{aspect-ratio:1/1}
+.clip img,.clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.clip .play{position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;border:1px solid rgba(243,220,154,.6);background:rgba(10,13,19,.6);display:grid;place-items:center;cursor:pointer;color:var(--gold-hi)}
+.clip .play svg{width:16px;height:16px;fill:currentColor;transform:scaleX(-1)}
+.clip .badge{position:absolute;top:8px;inset-inline-start:8px;font-size:12px;background:rgba(10,13,19,.85);border:1px solid var(--line);border-radius:4px;padding:1px 7px;color:var(--gold-hi)}
+.clip .body{display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px}
+.clip .name{font-weight:700}
+.clip .meta{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums}
+.clip .btn{width:100%}
+@media (max-width:760px){ .lib{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px} }
 @media (max-width:1100px){ .kpis{grid-template-columns:repeat(3,minmax(0,1fr))} .c4,.c5,.c7,.c8{grid-column:span 6} }
 @media (max-width:760px){
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -163,9 +183,13 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
         <button class="btn btn-ghost btn-sm" type="button" id="logout">יציאה</button>
       </div>
     </div>
+    <nav class="wrap tabs" role="tablist" aria-label="אזורים">
+      <button type="button" role="tab" id="tabStats" aria-selected="true" aria-controls="viewStats">סטטיסטיקות</button>
+      <button type="button" role="tab" id="tabVideos" aria-selected="false" aria-controls="viewVideos">סרטונים</button>
+    </nav>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="viewStats" role="tabpanel" aria-labelledby="tabStats">
     <section class="kpis" aria-label="מדדים עיקריים">
       <div class="kpi"><div class="k">מבקרים ייחודיים</div><div class="v" id="k_visitors">–</div><div class="s" id="k_sessions"></div></div>
       <div class="kpi"><div class="k">צפיות בעמוד</div><div class="v" id="k_pageviews">–</div><div class="s">כולל כניסות חוזרות</div></div>
@@ -232,6 +256,20 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
       </div>
     </section>
   </main>
+
+  <main class="wrap" id="viewVideos" role="tabpanel" aria-labelledby="tabVideos" hidden>
+    <section class="card lib-head">
+      <div>
+        <h2>כל הסרטונים באתר</h2>
+        <p class="sub" id="libSub">טוען…</p>
+      </div>
+      <div class="lib-actions">
+        <button class="btn btn-gold" type="button" id="zipAll">הורדת כל הסרטונים (ZIP)</button>
+      </div>
+    </section>
+    <p class="ok" id="zipMsg" role="status"></p>
+    <section class="lib" id="lib"></section>
+  </main>
 </div>
 
 <script>
@@ -272,7 +310,7 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
     } catch(err) { $('loginErr').textContent = 'אין חיבור לשרת. נסו שוב.'; }
     finally { $('loginBtn').disabled = false; }
   });
-  $('logout').addEventListener('click', () => { pass = null; try { sessionStorage.removeItem('hf_admin'); } catch(e){} $('app').hidden = true; $('login').hidden = false; $('pass').value = ''; });
+  $('logout').addEventListener('click', () => { showTab('stats'); pass = null; try { sessionStorage.removeItem('hf_admin'); } catch(e){} $('app').hidden = true; $('login').hidden = false; $('pass').value = ''; });
   document.querySelectorAll('.ranges button').forEach(b => b.addEventListener('click', () => {
     range = b.dataset.range; document.querySelectorAll('.ranges button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); load();
   }));
@@ -385,6 +423,82 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
       c[2].textContent = (e.type === 'section_view' ? (SECTION_NAMES[e.label] || e.label) : (e.label || '')).slice(0, 60);
       c[3].textContent = devName[e.device] || e.device || ''; c[4].textContent = (e.src || 'ישיר').replace(/^https?:\/\//, '').slice(0, 40); c[5].textContent = e.vid || ''; });
   }
+
+
+  // tabs
+  function showTab(which){
+    const vid = which === 'videos';
+    $('tabStats').setAttribute('aria-selected', String(!vid)); $('tabVideos').setAttribute('aria-selected', String(vid));
+    $('viewStats').hidden = vid; $('viewVideos').hidden = !vid;
+    document.querySelector('.ranges').hidden = vid;
+    $('csv').hidden = vid;
+    if (vid) loadLibrary();
+  }
+  $('tabStats').addEventListener('click', () => showTab('stats'));
+  $('tabVideos').addEventListener('click', () => showTab('videos'));
+
+  // video library: reads the live list straight from the site, so it always matches what is published
+  let lib = null;
+  const pad = n => String(n).padStart(2, '0');
+  const mb = b => b ? (b / 1048576).toFixed(1) + 'MB' : '';
+  const dur = s => s ? Math.floor(s / 60) + ':' + pad(Math.round(s % 60)) : '';
+  async function loadLibrary(){
+    if (lib) return;
+    try {
+      const html = await fetch('/?lib=' + Date.now(), { cache: 'no-store' }).then(r => r.text());
+      const m = html.match(/const VIDEOS = (\[[\s\S]*?\]);/);
+      const wall = m ? JSON.parse(m[1]) : [];
+      lib = [{ f: 'hero_main', w: 720, h: 1280, hero: true }].concat(wall);
+    } catch(e) { $('libSub').textContent = 'לא הצלחתי לטעון את רשימת הסרטונים'; return; }
+    const opens = {}; ((last && last.videos) || []).forEach(v => opens[v.video] = v.opens);
+    $('lib').innerHTML = lib.map((v, i) => {
+      const shape = v.w > v.h ? ' land' : (v.w === v.h ? ' sq' : '');
+      const title = v.hero ? 'סרטון הפתיחה' : 'סרטון ' + i;
+      return '<article class="clip" data-i="' + i + '"><div class="media' + shape + '"><img loading="lazy" alt="" src="/v/' + v.f + '.jpg">' +
+        '<button class="play" type="button" aria-label="ניגון ' + title + '"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg></button>' +
+        (v.hero ? '<span class="badge">פתיחה</span>' : '') + '</div>' +
+        '<div class="body"><span class="name">' + title + '</span><span class="meta" data-meta>' + (v.w > v.h ? 'רוחבי' : v.w === v.h ? 'ריבועי' : 'אנכי') + (opens[v.f] ? ' · ' + opens[v.f] + ' פתיחות' : '') + '</span>' +
+        '<a class="btn btn-ghost btn-sm" href="/v/' + v.f + '.mp4" download="' + fileName(v, i) + '">הורדה</a></div></article>';
+    }).join('');
+    $('libSub').textContent = lib.length + ' סרטונים: סרטון הפתיחה ו־' + (lib.length - 1) + ' הסרטונים בקיר, בגרסה שמוצגת באתר';
+    // sizes + durations
+    let total = 0;
+    lib.forEach((v, i) => {
+      const card = $('lib').querySelector('[data-i="' + i + '"]');
+      fetch('/v/' + v.f + '.mp4', { method: 'HEAD' }).then(r => { const b = +r.headers.get('content-length') || 0; v.size = b; total += b; addMeta(card, mb(b)); $('libSub').textContent = lib.length + ' סרטונים · ' + mb(total) + ' סה״כ, בגרסה שמוצגת באתר'; }).catch(() => {});
+      const probe = document.createElement('video'); probe.preload = 'metadata'; probe.muted = true; probe.src = '/v/' + v.f + '.mp4';
+      probe.addEventListener('loadedmetadata', () => { addMeta(card, dur(probe.duration)); probe.removeAttribute('src'); probe.load(); }, { once: true });
+    });
+    $('lib').addEventListener('click', e => {
+      const b = e.target.closest('.play'); if (!b) return;
+      const card = b.closest('.clip'), v = lib[+card.dataset.i], media = card.querySelector('.media');
+      document.querySelectorAll('.clip video').forEach(x => { x.pause(); });
+      const el = document.createElement('video'); el.src = '/v/' + v.f + '.mp4'; el.controls = true; el.playsInline = true; el.autoplay = true;
+      b.remove(); media.appendChild(el); el.play().catch(() => {});
+    });
+  }
+  function addMeta(card, t){ if (!card || !t) return; const m = card.querySelector('[data-meta]'); m.textContent += ' · ' + t; }
+  function fileName(v, i){ return 'simcha-gdola-halayla-' + (v.hero ? '00-opening' : pad(i)) + '.mp4'; }
+
+  $('zipAll').addEventListener('click', async () => {
+    if (!lib) return;
+    const btn = $('zipAll'); btn.disabled = true; $('zipMsg').style.color = '';
+    try {
+      if (!window.JSZip) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+      const zip = new JSZip();
+      for (let i = 0; i < lib.length; i++) {
+        $('zipMsg').textContent = 'אורז סרטון ' + (i + 1) + ' מתוך ' + lib.length + '…';
+        const buf = await fetch('/v/' + lib[i].f + '.mp4').then(r => { if (!r.ok) throw new Error(); return r.arrayBuffer(); });
+        zip.file(fileName(lib[i], i), buf, { compression: 'STORE' });
+      }
+      $('zipMsg').textContent = 'מכין את הקובץ להורדה…';
+      const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'simcha-gdola-halayla-videos.zip'; document.body.appendChild(a); a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+      $('zipMsg').textContent = 'ההורדה התחילה: ' + lib.length + ' סרטונים, ' + mb(blob.size);
+    } catch(e) { $('zipMsg').style.color = 'var(--bad)'; $('zipMsg').textContent = 'ההורדה נכשלה. אפשר להוריד כל סרטון בנפרד.'; }
+    finally { btn.disabled = false; }
+  });
 
   // CSV
   $('csv').addEventListener('click', async () => {
