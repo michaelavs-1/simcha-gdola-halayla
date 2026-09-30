@@ -452,6 +452,22 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   fetch(SB + '/rest/v1/rpc/hafla_config', { method: 'POST', headers: { 'apikey': KEY, 'Content-Type': 'application/json' }, body: '{}' })
     .then(function(r){ return r.json(); }).then(function(c){ clearTimeout(t); initPixel(c && c.pixel_id); }).catch(function(){});
 
+  // pass fbclid / gclid / utm on to barby.co.il so Barby's pixel (the same one) can attribute the purchase to the ad click
+  var carry = {};
+  try { carry = JSON.parse(sessionStorage.getItem('hf_carry') || '{}'); } catch(e){}
+  ['fbclid', 'gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function(k){ var v = q.get(k); if (v) carry[k] = v; });
+  try { sessionStorage.setItem('hf_carry', JSON.stringify(carry)); } catch(e){}
+  function decorate(){
+    document.querySelectorAll('a.buy[href^="https://barby.co.il/"]').forEach(function(a){
+      var u = new URL(a.href);
+      Object.keys(carry).forEach(function(k){ u.searchParams.set(k, carry[k]); });
+      if (!carry.utm_source) { u.searchParams.set('utm_source', 'barby-hafla'); u.searchParams.set('utm_medium', 'landing_page'); }
+      if (!carry.utm_campaign) u.searchParams.set('utm_campaign', 'simcha_' + (a.getAttribute('data-date') || '').replace('.', ''));
+      a.href = u.toString();
+    });
+  }
+  document.addEventListener('DOMContentLoaded', decorate);
+
   window.hafla = { t: function(type, label, value, pixel){ send(type, label, value); if (pixel) px.apply(null, pixel); } };
   send('pageview', document.title);
 
@@ -480,7 +496,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     var seen = {};
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){
       if (!e.isIntersecting || seen[e.target.id]) return; seen[e.target.id] = 1;
-      if (e.target.id === 'tickets') hafla.t('section_view', 'tickets', null, ['track', 'ViewContent', { content_name: 'tickets', content_category: 'tickets' }]);
+      if (e.target.id === 'tickets') { hafla.t('section_view', 'tickets', null, ['track', 'ViewContent', { content_name: 'tickets', content_category: 'tickets' }]); px('trackCustom', 'TicketsView', {}); }
       else hafla.t('section_view', e.target.id, null, ['trackCustom', 'SectionView', { section: e.target.id }]);
     }); }, { threshold: 0.35 });
     document.addEventListener('DOMContentLoaded', function(){ ['tickets', 'about', 'videos', 'history', 'final'].forEach(function(id){ var el = document.getElementById(id); if (el) io.observe(el); }); });
