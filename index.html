@@ -161,6 +161,39 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 .lb-close{top:10px;inset-inline-start:12px}
 .lb-prev{bottom:14px;inset-inline-start:12px}
 .lb-next{bottom:14px;inset-inline-end:12px}
+.lb-stage{position:relative;max-width:100%;max-height:100%}
+.lb-stage video{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain}
+/* ticket chips (on videos, end card, after the wall) */
+.dchip{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:78px;padding:7px 10px 6px;border-radius:10px;background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--brass));color:#1a1206;text-decoration:none;line-height:1;box-shadow:0 0 0 1px rgba(243,220,154,.5) inset,0 8px 24px -10px rgba(216,180,96,.8);transition:transform .15s ease}
+.dchip:hover{transform:translateY(-1px)}
+.dchip b{font-family:var(--cond);font-weight:700;font-size:23px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.dchip small{font:700 11px/1.1 var(--body);margin-top:3px;white-space:nowrap}
+.vbuy{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;padding:7px 8px 8px;border-radius:14px;background:rgba(10,13,19,.66);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(243,220,154,.35);max-width:calc(100% - 12px);transition:opacity .25s}
+.vbuy p{margin:0;font:700 13px/1.2 var(--body);color:var(--gold-hi);white-space:nowrap}
+.vbuy .vrow{display:flex;gap:6px}
+.lb-stage.ended .vbuy{opacity:0;pointer-events:none}
+.lb-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;text-align:center;background:rgba(10,13,19,.88);border-radius:6px}
+.lb-end[hidden],.vbuy[hidden],.wall-cta[hidden]{display:none}
+.lb-end .k{margin:0;font-family:var(--cond);font-size:22px;letter-spacing:.06em;color:var(--gold)}
+.lb-end h3{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(26px,5vw,36px);line-height:1.15;color:var(--cream)}
+.lb-end .vrow{display:flex;flex-direction:column;gap:10px;width:min(100%,320px)}
+.lb-end .dchip{flex-direction:row;gap:10px;justify-content:center;padding:13px 16px;border-radius:999px}
+.lb-end .dchip b{font-size:26px}
+.lb-end .dchip small{font-size:14px;margin:0}
+.lb-end-next{background:transparent;border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:10px 20px;font:600 15px var(--body);cursor:pointer}
+.wall-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;margin-top:22px;padding:20px;border:1px solid rgba(243,220,154,.35);border-radius:8px;background:linear-gradient(90deg,rgba(216,180,96,.04),rgba(216,180,96,.12))}
+.wall-cta h3{margin:0 0 4px;font-family:var(--display);font-weight:400;font-size:24px;color:var(--cream)}
+.wall-cta p{margin:0;color:var(--muted);font-size:15px}
+.wall-cta .vrow{display:flex;gap:10px}
+.wall-cta .dchip{min-width:96px;padding:10px 14px 8px}
+.wall-cta .dchip b{font-size:28px}
+.wall-cta .dchip small{font-size:12px}
+@media (max-width:640px){
+  .wall-cta .vrow{width:100%}
+  .wall-cta .dchip{flex:1;min-width:0;padding-inline:6px}
+  .vbuy .dchip{min-width:0;padding-inline:9px}
+  .vbuy .dchip b{font-size:21px}
+}
 
 @media (max-width:860px){
   .stage{grid-template-columns:1fr}
@@ -209,7 +242,6 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .logos-lg .lg-algo{height:62px}
   footer .wrap{flex-direction:column;gap:6px}
   .lb-inner{padding:calc(62px + env(safe-area-inset-top,0px)) 8px calc(84px + env(safe-area-inset-bottom,0px))}
-  .lb video{width:100%;max-height:100%}
   .lb-btn{width:50px;height:50px}
   .lb-close{top:calc(8px + env(safe-area-inset-top,0px))}
   .lb-prev,.lb-next{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
@@ -315,21 +347,21 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
           <span class="tag">ספיישל זוהר ארגוב</span>
           <h3>המלך: ערב מחווה לגדול הזמר הים תיכוני</h3>
         </div>
-        <a class="btn btn-gold buy" data-show="5537" data-date="17.10" href="https://barby.co.il/show/5537" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" data-show="5537" data-date="17.10" data-chip="זוהר ארגוב" href="https://barby.co.il/show/5537" target="_blank" rel="noopener">לרכישת כרטיסים</a>
       </li>
       <li class="row">
         <div class="d"><b dir="ltr">26.10</b><span>יום שני</span></div>
         <div class="info">
           <h3>שמחה גדולה הלילה · חאפלה מזרח תיכון</h3>
         </div>
-        <a class="btn btn-gold buy" data-show="5513" data-date="26.10" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" data-show="5513" data-date="26.10" data-chip="יום שני" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
       </li>
       <li class="row">
         <div class="d"><b dir="ltr">27.10</b><span>יום שלישי</span></div>
         <div class="info">
           <h3>שמחה גדולה הלילה · חאפלה מזרח תיכון</h3>
         </div>
-        <a class="btn btn-gold buy" data-show="5540" data-date="27.10" href="https://barby.co.il/show/5540" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" data-show="5540" data-date="27.10" data-chip="יום שלישי" href="https://barby.co.il/show/5540" target="_blank" rel="noopener">לרכישת כרטיסים</a>
       </li>
     </ol>
     <div class="wa-band">
@@ -374,15 +406,12 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       <p class="muted" style="margin:0" id="wallCount"></p>
     </div>
     <div class="wall" id="wall"></div>
-  </div>
-</section>
-
-<section class="history" id="history">
-  <div class="wrap history-grid">
-    <div>
-      <p class="kicker">היסטוריה קצרה</p>
-      <h2>מניסוי של ערב אחד לליין קבוע</h2>
-      <p class="lead">הערב הראשון עלה ביוני 2023 כגרסה מזרחית של חתול בשק, וכבר אז נקרא שמחה גדולה הלילה. מאז הליין חוזר לבארבי כל חודשיים למופע כפול, ספיישלים לזוהר ארגוב וערבי מחווה מיוחדים.</p>
+    <div class="wall-cta">
+      <div>
+        <h3>ראיתם איך זה נראה? עכשיו בואו להיות שם</h3>
+        <p>בחרו תאריך ועברו ישר לרכישה באתר בארבי</p>
+      </div>
+      <div class="vrow" data-chips="after_videos"></div>
     </div>
   </div>
 </section>
@@ -416,7 +445,16 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
 
 <dialog class="lb rtl" id="lb" aria-label="נגן וידאו">
   <div class="lb-inner">
-    <video id="lbVideo" controls playsinline preload="auto"></video>
+    <div class="lb-stage" id="lbStage">
+      <video id="lbVideo" controls playsinline preload="auto"></video>
+      <div class="vbuy" id="lbBuy"><p>לרכישת כרטיסים</p><div class="vrow" data-chips="video"></div></div>
+      <div class="lb-end" id="lbEnd" hidden>
+        <p class="k">אהבתם?</p>
+        <h3>בואו לראות את זה חי</h3>
+        <div class="vrow" data-chips="video_end" data-long="1"></div>
+        <button class="lb-end-next" id="lbEndNext" type="button">לסרטון הבא <span id="lbEndCount"></span></button>
+      </div>
+    </div>
     <p class="lb-cap" id="lbCap" dir="ltr"></p>
     <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="סגירה">✕</button>
     <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="הסרטון הקודם">›</button>
@@ -478,8 +516,10 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     if (a.matches('a.buy')) {
       var d = a.getAttribute('data-date'), show = a.getAttribute('data-show');
       if (!a.getAttribute('href')) return;
-      hafla.t('ticket_click', d, Number(show), ['track', 'InitiateCheckout', { content_name: 'שמחה גדולה הלילה ' + d, content_ids: [show], content_type: 'product', content_category: 'tickets' }]);
-      px('trackCustom', 'TicketClick', { date: d, show_id: show });
+      var place = a.getAttribute('data-src') || 'tickets';
+      hafla.t('ticket_click', d, Number(show), ['track', 'InitiateCheckout', { content_name: 'שמחה גדולה הלילה ' + d, content_ids: [show], content_type: 'product', content_category: 'tickets', placement: place }]);
+      px('trackCustom', 'TicketClick', { date: d, show_id: show, placement: place });
+      send('buy_place', place, Number(show));
     } else if (a.id === 'soundBtn') {
       setTimeout(function(){ var on = a.getAttribute('aria-pressed') === 'true'; hafla.t('sound', on ? 'on' : 'off', null, ['trackCustom', 'SoundToggle', { state: on ? 'on' : 'off' }]); }, 0);
     } else if (a.classList.contains('tile')) {
@@ -499,7 +539,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       if (e.target.id === 'tickets') { hafla.t('section_view', 'tickets', null, ['track', 'ViewContent', { content_name: 'tickets', content_category: 'tickets' }]); px('trackCustom', 'TicketsView', {}); }
       else hafla.t('section_view', e.target.id, null, ['trackCustom', 'SectionView', { section: e.target.id }]);
     }); }, { threshold: 0.35 });
-    document.addEventListener('DOMContentLoaded', function(){ ['tickets', 'about', 'videos', 'history', 'final'].forEach(function(id){ var el = document.getElementById(id); if (el) io.observe(el); }); });
+    document.addEventListener('DOMContentLoaded', function(){ ['tickets', 'about', 'videos', 'final'].forEach(function(id){ var el = document.getElementById(id); if (el) io.observe(el); }); });
   }
   // scroll depth
   var marks = [25, 50, 75, 100], hit = {};
@@ -575,6 +615,23 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
     if (!/^https?:/.test(a.getAttribute('href'))) { a.textContent = 'הכרטיסים נפתחים בקרוב'; a.setAttribute('aria-disabled','true'); a.removeAttribute('href'); }
   });
 
+  // ticket chips: one tap from any video straight to the Barby checkout page
+  const SHOWS = Array.from(document.querySelectorAll('#tickets a.buy[href]')).map(a => ({ href: a.getAttribute('href'), show: a.dataset.show, date: a.dataset.date, chip: a.dataset.chip || '', special: !!a.closest('.special') }));
+  document.querySelectorAll('[data-chips]').forEach(box => {
+    const place = box.dataset.chips, long = box.dataset.long;
+    if (!SHOWS.length) { (box.closest('.vbuy, .wall-cta, .lb-end') || box).hidden = true; return; }
+    SHOWS.forEach(sh => {
+      const a = document.createElement('a');
+      a.className = 'dchip buy'; a.href = sh.href; a.target = '_blank'; a.rel = 'noopener';
+      a.dataset.show = sh.show; a.dataset.date = sh.date; a.dataset.src = place;
+      a.innerHTML = '<b dir="ltr"></b><small></small>';
+      a.querySelector('b').textContent = sh.date;
+      a.querySelector('small').textContent = long ? (sh.special ? 'ספיישל זוהר ארגוב' : 'שמחה גדולה הלילה') : sh.chip;
+      a.setAttribute('aria-label', 'לרכישת כרטיסים ל־' + sh.date);
+      box.appendChild(a);
+    });
+  });
+
   // video wall
   const wall = document.getElementById('wall');
   document.getElementById('wallCount').textContent = VIDEOS.length + ' סרטונים מהבמה ומהקהל';
@@ -621,10 +678,32 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
 
   // lightbox
   const lb = document.getElementById('lb'), lv = document.getElementById('lbVideo'), lc = document.getElementById('lbCap');
-  let cur = 0;
+  const stage = document.getElementById('lbStage'), lbEnd = document.getElementById('lbEnd'), endCount = document.getElementById('lbEndCount');
+  let cur = 0, endTimer = null;
+  function fit(){
+    const v = VIDEOS[cur]; if (!v || !lb.open) return;
+    const inner = stage.parentElement, cs = getComputedStyle(inner);
+    const aw = inner.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const ah = inner.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const sc = Math.min(Math.min(aw, 1100) / v.w, ah / v.h);
+    stage.style.width = Math.floor(v.w * sc) + 'px'; stage.style.height = Math.floor(v.h * sc) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  function hideEnd(){ clearInterval(endTimer); endTimer = null; lbEnd.hidden = true; stage.classList.remove('ended'); }
+  function showEnd(){
+    lbEnd.hidden = false; stage.classList.add('ended');
+    let n = 8; endCount.textContent = '(' + n + ')';
+    try { hafla.t('video_end', VIDEOS[cur].f, cur + 1, null); } catch(e){}
+    clearInterval(endTimer);
+    endTimer = setInterval(() => { n--; endCount.textContent = '(' + n + ')'; if (n <= 0) show(cur + 1); }, 1000);
+  }
+  lbEnd.addEventListener('pointerdown', e => { if (!e.target.closest('#lbEndNext')) { clearInterval(endTimer); endTimer = null; endCount.textContent = ''; } });
+  document.getElementById('lbEndNext').addEventListener('click', () => show(cur + 1));
   function show(i){
+    hideEnd();
     cur = (i + VIDEOS.length) % VIDEOS.length;
     const v = VIDEOS[cur];
+    fit();
     try { hafla.t('video_open', v.f, cur + 1, ['trackCustom', 'VideoOpen', { video: v.f, position: cur + 1 }]); } catch(e){}
     lv.poster = 'v/' + v.f + '.jpg';
     lv.src = 'v/' + v.f + '.mp4';
@@ -637,9 +716,10 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
     hv.pause();
     document.querySelectorAll('.tile video').forEach(x => x.pause());
     if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open','');
-    show(i);
+    show(i); requestAnimationFrame(fit);
   }
   function closeLb(){
+    hideEnd();
     lv.pause(); lv.removeAttribute('src'); lv.load();
     if (lb.open) lb.close();
     hv.play().catch(()=>{}); paint();
@@ -647,9 +727,9 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
   document.getElementById('lbClose').addEventListener('click', closeLb);
   document.getElementById('lbNext').addEventListener('click', () => show(cur + 1));
   document.getElementById('lbPrev').addEventListener('click', () => show(cur - 1));
-  lb.addEventListener('close', () => { lv.pause(); });
+  lb.addEventListener('close', () => { lv.pause(); hideEnd(); });
   lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-inner')) closeLb(); });
-  lv.addEventListener('ended', () => show(cur + 1));
+  lv.addEventListener('ended', showEnd);
   let sx = null, sy = null;
   lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
   lb.addEventListener('touchend', e => {
