@@ -254,6 +254,7 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
           <div class="field"><label for="uSrc">מקור</label><input class="input" id="uSrc" placeholder="facebook"></div>
           <div class="field"><label for="uMed">סוג</label><input class="input" id="uMed" placeholder="paid"></div>
           <div class="field"><label for="uCmp">קמפיין</label><input class="input" id="uCmp" placeholder="hamelech_1710"></div>
+          <div class="field"><label for="uShow">הופעה בראש העמוד</label><select class="input" id="uShow"><option value="">כל ההופעות</option><option value="1710">17.10 · זוהר ארגוב</option><option value="2610">26.10</option><option value="2710">27.10</option></select></div>
         </div>
         <div class="utm-out"><input class="input" id="uOut" readonly aria-label="הלינק המוכן"><button class="btn btn-gold btn-sm" type="button" id="uCopy">העתקה</button></div>
       </div>
@@ -281,7 +282,7 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
   const SITE = 'https://barby-hafla.com/';
   const SHOW_NAMES = { '17.10': 'המלך · ספיישל זוהר ארגוב', '26.10': 'חאפלה מזרח תיכון', '27.10': 'חאפלה מזרח תיכון' };
   const TYPE_NAMES = { pageview: 'כניסה', ticket_click: 'לחיצה על כרטיסים', whatsapp_click: 'וואטסאפ', video_open: 'פתיחת סרטון', sound: 'סאונד', scroll: 'גלילה', section_view: 'צפייה באזור', engaged: 'זמן צפייה', cta: 'כפתור', video_end: 'סרטון נצפה עד הסוף', test: 'בדיקה' };
-  const PLACE_NAMES = { tickets: 'רשימת ההופעות', video: 'כפתור על הסרטון', video_end: 'מסך סוף הסרטון', after_videos: 'אחרי קיר הסרטונים' };
+  const PLACE_NAMES = { tickets: 'רשימת ההופעות', video: 'כפתור על הסרטון', video_end: 'מסך סוף הסרטון', after_videos: 'אחרי קיר הסרטונים', banner: 'באנר כרטיסים בודדים 26.10', countdown: 'באנר ספירה לאחור 17.10', hero: 'תאריכים בפתיח העמוד' };
   const SECTION_NAMES = { tickets: 'הכרטיסים', about: 'מה קורה בערב', videos: 'הסרטונים', final: 'סוף העמוד' };
   const $ = id => document.getElementById(id);
   const fmt = n => (n == null ? '–' : Number(n).toLocaleString('he-IL'));
@@ -535,10 +536,11 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
   function buildUtm(){
     const p = new URLSearchParams();
     const s = $('uSrc').value.trim(), m = $('uMed').value.trim(), c = $('uCmp').value.trim();
+    const sh = $('uShow').value; if (sh) p.set('show', sh);
     if (s) p.set('utm_source', s); if (m) p.set('utm_medium', m); if (c) p.set('utm_campaign', c);
     $('uOut').value = SITE + (p.toString() ? '?' + p.toString() : '');
   }
-  ['uSrc', 'uMed', 'uCmp'].forEach(id => $(id).addEventListener('input', buildUtm)); buildUtm();
+  ['uSrc', 'uMed', 'uCmp', 'uShow'].forEach(id => $(id).addEventListener('input', buildUtm)); buildUtm();
   $('uCopy').addEventListener('click', () => {
     const v = $('uOut').value;
     (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(() => { $('uCopy').textContent = 'הועתק'; setTimeout(() => $('uCopy').textContent = 'העתקה', 1500); })
