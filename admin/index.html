@@ -203,7 +203,8 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
       <div class="card c6"><h2>מבקרים ייחודיים ביום</h2><p class="sub">שעון ישראל</p><div class="chart" id="chVisitors"></div></div>
       <div class="card c6"><h2>לחיצות על כרטיסים ביום</h2><p class="sub">מעבר לעמוד הרכישה בבארבי</p><div class="chart" id="chTickets"></div></div>
 
-      <div class="card c5"><h2>לחיצות לפי הופעה</h2><p class="sub">לחיצות · אנשים שונים</p><div class="shows" id="shows"></div></div>
+      <div class="card c5"><h2>לחיצות לפי הופעה</h2><p class="sub">לחיצות · אנשים שונים</p><div class="shows" id="shows"></div>
+        <h2 style="margin-top:22px">מאיפה לחצו על כרטיסים</h2><p class="sub">המיקום בעמוד שממנו עברו לרכישה</p><ul class="bars" id="places"></ul></div>
       <div class="card c7"><h2>מקורות תנועה</h2><p class="sub">utm_source, ואם אין אז האתר שהפנה</p>
         <div class="scroll-x"><table><thead><tr><th>מקור</th><th>מבקרים</th><th>לחצו לכרטיסים</th><th>המרה</th></tr></thead><tbody id="sources"></tbody></table></div>
       </div>
@@ -279,8 +280,9 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
   const SB = 'https://lfgqvowyryozwnudbrxm.supabase.co', KEY = 'sb_publishable_MkXm84JBOaIcD5rqdX6mXQ_vQOhlBdm';
   const SITE = 'https://barby-hafla.com/';
   const SHOW_NAMES = { '17.10': 'המלך · ספיישל זוהר ארגוב', '26.10': 'חאפלה מזרח תיכון', '27.10': 'חאפלה מזרח תיכון' };
-  const TYPE_NAMES = { pageview: 'כניסה', ticket_click: 'לחיצה על כרטיסים', whatsapp_click: 'וואטסאפ', video_open: 'פתיחת סרטון', sound: 'סאונד', scroll: 'גלילה', section_view: 'צפייה באזור', engaged: 'זמן צפייה', cta: 'כפתור', test: 'בדיקה' };
-  const SECTION_NAMES = { tickets: 'הכרטיסים', about: 'מה קורה בערב', videos: 'הסרטונים', history: 'היסטוריה', final: 'סוף העמוד' };
+  const TYPE_NAMES = { pageview: 'כניסה', ticket_click: 'לחיצה על כרטיסים', whatsapp_click: 'וואטסאפ', video_open: 'פתיחת סרטון', sound: 'סאונד', scroll: 'גלילה', section_view: 'צפייה באזור', engaged: 'זמן צפייה', cta: 'כפתור', video_end: 'סרטון נצפה עד הסוף', test: 'בדיקה' };
+  const PLACE_NAMES = { tickets: 'רשימת ההופעות', video: 'כפתור על הסרטון', video_end: 'מסך סוף הסרטון', after_videos: 'אחרי קיר הסרטונים' };
+  const SECTION_NAMES = { tickets: 'הכרטיסים', about: 'מה קורה בערב', videos: 'הסרטונים', final: 'סוף העמוד' };
   const $ = id => document.getElementById(id);
   const fmt = n => (n == null ? '–' : Number(n).toLocaleString('he-IL'));
   let pass = null, range = '7', last = null;
@@ -396,6 +398,9 @@ td{padding:7px 8px;border-bottom:1px solid var(--line-2);font-variant-numeric:ta
     (d.tickets_by_show || []).forEach(x => { if (!shows.find(s => s.show === x.show)) shows.push(x); });
     const smax = Math.max(1, ...shows.map(s => s.clicks));
     $('shows').innerHTML = shows.map(s => '<div class="show"><span class="d">' + s.show + '</span><span class="t">' + (SHOW_NAMES[s.show] || '') + '</span><span class="num">' + fmt(s.clicks) + '<small>' + fmt(s.people) + ' אנשים</small></span><span class="track"><span class="fill" style="width:' + (s.clicks / smax * 100) + '%"></span></span></div>').join('');
+
+    const places = d.tickets_by_place || [];
+    if (places.length) bars($('places'), places, 'place', 'clicks', n => PLACE_NAMES[n] || n); else $('places').innerHTML = '<li class="empty">אין עדיין נתונים</li>';
 
     const src = d.sources || [];
     $('sources').innerHTML = src.length ? src.map(s => '<tr><td class="sn"></td><td>' + fmt(s.visitors) + '</td><td>' + fmt(s.buyers_clicked) + '</td><td>' + (s.visitors ? (s.buyers_clicked / s.visitors * 100).toFixed(0) + '%' : '–') + '</td></tr>').join('') : '<tr><td colspan="4" class="empty">אין עדיין נתונים</td></tr>';
