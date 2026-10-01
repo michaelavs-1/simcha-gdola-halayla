@@ -260,6 +260,22 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
   .btn{transition:none}
 }
 
+/* low-stock banner (26.10) */
+.low-banner{display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 16px;text-decoration:none;color:#fff;font:700 15px/1.25 var(--body);text-align:center;background:#a3111f;animation:lowbg 1.1s steps(1,end) infinite}
+.low-banner .dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:lowblink 1.1s steps(1,end) infinite}
+.low-banner b{font-family:var(--cond);font-size:20px;font-weight:700;letter-spacing:.03em;line-height:1}
+.low-banner u{text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.8);white-space:nowrap}
+@keyframes lowbg{0%{background:#a3111f}50%{background:#6e0a15}}
+@keyframes lowblink{0%{opacity:1}50%{opacity:0}}
+.low-tag{align-self:flex-start;font:700 13px/1 var(--body);color:#fff;background:#a3111f;border-radius:3px;padding:5px 9px;animation:lowbg 1.1s steps(1,end) infinite}
+.dchip{position:relative}
+.dchip .low{position:absolute;top:-8px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 10px/1 var(--body);color:#fff;background:#a3111f;border-radius:999px;padding:3px 7px;animation:lowbg 1.1s steps(1,end) infinite}
+.lb-end .dchip .low{position:static;transform:none;font-size:11px;padding:4px 8px}
+.vbuy{padding-top:9px}
+.vbuy .vrow{padding-top:6px}
+@media (max-width:640px){ .low-banner{font-size:13px;gap:8px;padding:7px 12px} .low-banner b{font-size:18px} }
+@media (prefers-reduced-motion:reduce){ .low-banner,.low-tag,.dchip .low,.low-banner .dot{animation:none} }
+
 /* tickets */
 .tickets{background:var(--velvet);border-bottom:1px solid var(--line)}
 .rows{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--line)}
@@ -313,6 +329,7 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
     </div>
     <a class="btn btn-gold btn-sm" href="#tickets" data-track="cta" data-label="header">לכרטיסים</a>
   </div>
+  <a class="low-banner buy" data-show="5513" data-date="26.10" data-src="banner" href="https://barby.co.il/show/5513" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span><span>כרטיסים בודדים להופעה של <b dir="ltr">26.10</b></span><u>לרכישה</u></a>
 </header>
 
 <div class="hero" id="top">
@@ -352,9 +369,10 @@ dialog.lb::backdrop{background:rgba(5,7,10,.94)}
       <li class="row">
         <div class="d"><b dir="ltr">26.10</b><span>יום שני</span></div>
         <div class="info">
+          <span class="low-tag">כרטיסים בודדים</span>
           <h3>שמחה גדולה הלילה · חאפלה מזרח תיכון</h3>
         </div>
-        <a class="btn btn-gold buy" data-show="5513" data-date="26.10" data-chip="יום שני" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
+        <a class="btn btn-gold buy" data-show="5513" data-date="26.10" data-chip="יום שני" data-low="1" href="https://barby.co.il/show/5513" target="_blank" rel="noopener">לרכישת כרטיסים</a>
       </li>
       <li class="row">
         <div class="d"><b dir="ltr">27.10</b><span>יום שלישי</span></div>
@@ -616,7 +634,7 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
   });
 
   // ticket chips: one tap from any video straight to the Barby checkout page
-  const SHOWS = Array.from(document.querySelectorAll('#tickets a.buy[href]')).map(a => ({ href: a.getAttribute('href'), show: a.dataset.show, date: a.dataset.date, chip: a.dataset.chip || '', special: !!a.closest('.special') }));
+  const SHOWS = Array.from(document.querySelectorAll('#tickets a.buy[href]')).map(a => ({ href: a.getAttribute('href'), show: a.dataset.show, date: a.dataset.date, chip: a.dataset.chip || '', low: !!a.dataset.low, special: !!a.closest('.special') }));
   document.querySelectorAll('[data-chips]').forEach(box => {
     const place = box.dataset.chips, long = box.dataset.long;
     if (!SHOWS.length) { (box.closest('.vbuy, .wall-cta, .lb-end') || box).hidden = true; return; }
@@ -627,7 +645,8 @@ const VIDEOS = [{"f": "c01", "w": 480, "h": 854, "date": "ספיישל המלך"
       a.innerHTML = '<b dir="ltr"></b><small></small>';
       a.querySelector('b').textContent = sh.date;
       a.querySelector('small').textContent = long ? (sh.special ? 'ספיישל זוהר ארגוב' : 'שמחה גדולה הלילה') : sh.chip;
-      a.setAttribute('aria-label', 'לרכישת כרטיסים ל־' + sh.date);
+      if (sh.low) { const lo = document.createElement('span'); lo.className = 'low'; lo.textContent = 'כרטיסים בודדים'; a.appendChild(lo); }
+      a.setAttribute('aria-label', 'לרכישת כרטיסים ל־' + sh.date + (sh.low ? ', כרטיסים בודדים' : ''));
       box.appendChild(a);
     });
   });
